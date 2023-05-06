@@ -1,0 +1,10 @@
+---- 6 Mai 2023 ----
+   --- V0.1 ---
+    -- Bêta --
+
+Nouvelles fonctionnalités :
+- Capacité de se connecter et de créer un compte.
+
+
+Bugs résolus :
+/////////////////////
