@@ -1,0 +1,130 @@
+:root {
+    --color-body: #141414;
+    --color-nav: #1B3334;
+    --color-text: white;
+}
+
+html, body {
+    min-height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--color-body);
+    text-align: center;
+    overflow-y: hidden;
+    overflow-X: hidden;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.container_tchat {
+  flex: 1;
+  display: flex;
+  flex-direction: column; /* Ajout de flex-direction */
+  height: 100vh;
+}
+
+.message_form {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.message_input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px;
+  margin-left: 20px;
+  border-radius: 10px;
+}
+
+.submit {
+  padding: 10px;
+  margin: 10px;
+  margin-left: 5px;
+  border-radius: 10px;
+}
+
+.div_friend_list {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width: 20vw;
+  padding-inline: 10px;
+  height: 100vh;
+  background-color: blue;
+}
+
+.friend_list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.friend {
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  background-color: red;
+}
+
+.friend a {
+  text-decoration: none;
+  padding: 10px;
+  display: block;
+  text-decoration: none;
+  color: #333;
+  height: 100%;
+  width: 100%;
+}
+
+.friend a:hover {
+  text-decoration: underline;
+}
+
+.friend span {
+  font-size: 12px;
+  color: #999;
+  margin-left: 10px;
+}
+
+.tchat {
+  width: 100%;
+  min-height: 92%;
+  overflow-y: auto;
+}
+
+/* Style des messages */
+.message {
+  font-size: 20px;
+  padding: 15px;
+  margin: 20px;
+  color: white;
+}
+
+/* Style des messages de l'utilisateur */
+.user-message {
+  border-radius: 20px 20px 2px 20px;
+  text-align: right;
+  background-color: #1b1b1b;
+  margin-bottom: 5px;
+}
+
+/* Style des messages de l'utilisateur */
+.error-message {
+  border-radius: 20px;
+  text-align: center;
+  background-color: #240303;
+  margin-bottom: 5px;
+}
+
+.other-message {
+  border-radius: 20px 20px 20px 2px;
+  text-align: left;
+  background-color: #383838;
+  margin-bottom: 5px;
+}

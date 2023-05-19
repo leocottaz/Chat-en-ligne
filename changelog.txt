@@ -1,10 +1,17 @@
----- 6 Mai 2023 ----
-   --- V0.1 ---
-    -- Bêta --
+---- 19 Mai 2023 ---- 
+    --- V0.2 ---
+ -- Adding Tchat --
 
 Nouvelles fonctionnalités :
-- Capacité de se connecter et de créer un compte.
+- Création du menu d'accueil de l'utilisateur connecté
+- Possibilité de visualiser et écrire dans le tchat (créé auparavant dans les fichiers)
+- Affichage en direct des messages sans besoin de recharger la page
+- Compatibilités avec les variables de sessions.
 
 
 Bugs résolus :
+- Erreur d'accès à la base de données
+
+
+Bugs non résolus :
 /////////////////////

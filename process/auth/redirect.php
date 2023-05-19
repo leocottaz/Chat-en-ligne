@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // Récupération des variables du formulaire
 $username = isset($_POST['username']) ? $_POST['username'] : ''; // On récupère la valeur de l'input username du formulaire si elle existe sinon on initialise la variable à une chaîne vide.
 $password = isset($_POST['password']) ? $_POST['password'] : ''; // On récupère la valeur de l'input password du formulaire si elle existe sinon on initialise la variable à une chaîne vide.

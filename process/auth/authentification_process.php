@@ -1,11 +1,9 @@
 <?php 
-$json_file = '../../data/users.json';
 
 /**
  * Renvoie tous les utilisateurs enregistrés
  */
-function getAllUsers() {
-    global $json_file;
+function getAllUsers($json_file = '../../data/users.json') {
     try {
         $decode = file_get_contents($json_file);
         $json = json_decode($decode, true);
@@ -40,9 +38,9 @@ function generateToken() {
     return [$token, $user_id, $private_id];
 }
 
-function getUser($username) {
+function getUser($username, $json_file = '../../data/users.json') {
     // Récupération de la liste de tous les utilisateurs
-    $json = getAllUsers();
+    $json = getAllUsers($json_file);
 
     // Si l'adresse e-mail est une clé de la liste des utilisateurs ...
     return array_key_exists($username, $json)
@@ -50,11 +48,10 @@ function getUser($username) {
         : False;           // sinon: retourne faux
 }
 
-function updateJson($user_data) {
+function updateJson($user_data, $json_file = '../../data/users.json') {
     try {
-        global $json_file;
         // Conversion de la liste des utilisateurs en JSON indenté
-        $content = json_encode( $user_data, JSON_PRETTY_PRINT );
+        $content = json_encode($user_data, JSON_PRETTY_PRINT);
         // Remplacement du contenu du fichier.
         file_put_contents($json_file, $content);
     }
@@ -80,9 +77,13 @@ function addUser($username, $password, $remember) {
     // Sauvegarde de la liste des utilisateurs
     updateJson($json);
 
+    // Enregistrement des données dans la session de l'utilisateur
+    $_SESSION['username'] = $username;
+    $_SESSION['token'] = $user_ids[0];
+
     // On l'enregistre 30 jour ssi necessaire
     if ($remember == "1") {
-        setcookie("private_key", $json[$username]["private_id"], time()+60*60*24*30, '/'); // On crée un cookie qui contient l'username unique de l'utilisateur pour le garder authentifier
+        setcookie("username", $username, time()+60*60*24*30, '/'); // On crée un cookie qui contient l'username unique de l'utilisateur pour le garder authentifier
         setcookie("token", $user_ids[0], time()+60*60*24*30, '/');
     }
 }
@@ -139,11 +140,11 @@ function login($username, $password, $remember) {
     updateJson($json);
 
     // Enregistrement des données dans la session de l'utilisateur
-    $_SESSION['user_username'] = $username;
-    $_SESSION['user_token'] = $token;
+    $_SESSION['username'] = $username;
+    $_SESSION['token'] = $token;
 
     if ($remember == "1") {
-        setcookie("private_key", $json[$username]["private_id"], time()+60*60*24*30, '/'); // On crée un cookie qui contient l'username unique de l'utilisateur pour le garder authentifier
+        setcookie("username", $username, time()+60*60*24*30, '/'); // On crée un cookie qui contient l'username unique de l'utilisateur pour le garder authentifier
         setcookie("token", $token, time()+60*60*24*30, '/');
     }
 }
