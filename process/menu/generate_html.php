@@ -70,23 +70,24 @@ function tchat($json_file) {
         
         foreach ($conversation["messages"] as $message) {
             $author = $message["author"];
+            $id = $message["id"];
             $content = $message["content"];
             $read = $message["read"];
 
             if ($read) {
             if ($author == $_SESSION["username"]) {
                 echo "
-                <div class='message user-message'>$content</div>
+                <div class='message user-message' messageId='$id'><button class='delete_button' onclick='DeleteMessage($id)'>Delete</button>$content</div>
                 ";
             } else {
                 echo "
-                <div class='message other-message'>$content</div>
+                <div class='message other-message' messageId='$id'>$content</div>
                 ";
             }
         } else {
             if ($author == $_SESSION["username"]) {
                 echo "
-                <div class='message user-message'>$content</div>
+                <div class='message user-message' messageId='$id'><button class='delete_button' onclick='DeleteMessage($id)'>Delete</button>$content</div>
                 ";
             }
         }

@@ -25,6 +25,7 @@ body {
 
 .container_tchat {
   flex: 1;
+  max-width: 80vw;
   display: flex;
   flex-direction: column; /* Ajout de flex-direction */
   height: 100vh;
@@ -37,7 +38,7 @@ body {
 }
 
 .message_input {
-  width: 100%;
+  width: 80%;
   padding: 10px;
   margin: 10px;
   margin-left: 20px;
@@ -49,6 +50,19 @@ body {
   margin: 10px;
   margin-left: 5px;
   border-radius: 10px;
+}
+
+.delete {
+  background-image: url('./image/icon/trash.png');
+  background-color: rgb(157, 57, 57);
+  border: none;
+  outline: none;
+  box-shadow: none;
+  padding-inline: 30px;
+  margin: 10px;
+  border-radius: 10px;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .div_friend_list {
@@ -94,23 +108,26 @@ body {
 
 .tchat {
   width: 100%;
+  max-width: 100%;
   min-height: 92%;
   overflow-y: auto;
 }
 
 /* Style des messages */
 .message {
+  backdrop-filter: blur(10px); /* Flou gaussien appliqué à l'arrière-plan */
   font-size: 20px;
   padding: 15px;
   margin: 20px;
   color: white;
+  word-wrap: break-word;
 }
 
 /* Style des messages de l'utilisateur */
 .user-message {
   border-radius: 20px 20px 2px 20px;
   text-align: right;
-  background-color: #1b1b1b;
+  background-color: rgba(41, 41, 41, 0.7);
   margin-bottom: 5px;
 }
 
@@ -118,13 +135,26 @@ body {
 .error-message {
   border-radius: 20px;
   text-align: center;
-  background-color: #240303;
+  background-color: rgba(36, 3, 3, 0.5);
   margin-bottom: 5px;
 }
 
 .other-message {
   border-radius: 20px 20px 20px 2px;
   text-align: left;
-  background-color: #383838;
+  background-color: rgba(73, 73, 73, 0.7);
   margin-bottom: 5px;
+}
+
+.delete_button {
+  position: absolute;
+  display: none;
+  top: 9px;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  background-color: rgb(157, 57, 57);
+  padding: 10px;
+  color: white;
+  border-radius: 10px;
 }

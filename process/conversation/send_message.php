@@ -24,6 +24,7 @@ try {
             "author" => $MessageAuthor,
             "id" => $MessageId,
             "read" => False,
+            "status" => "OK",
             "date" => $MessageDate,
             "content" => $MessageContent
     );
@@ -41,7 +42,7 @@ try {
     echo "<div class='message error-message'> Une erreur est survenue lors de l'envoi de votre message </div>" . $e;
 }
 
-echo "<div class='message user-message'>" . htmlspecialchars($MessageContent) . "</div>";
+echo "<div class='message user-message' messageId='$MessageId'><button class='delete_button' onclick='DeleteMessage($MessageId)'>Delete</button>" . htmlspecialchars($MessageContent) . "</div>";
 
 
 

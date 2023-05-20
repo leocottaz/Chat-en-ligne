@@ -5,21 +5,30 @@ $Channel = $_POST["ch"];
 $ChannelFile = '../../data/conversation/' . $Channel . ".json";
 $decode = file_get_contents($ChannelFile);
 $json = json_decode($decode, true);
+$need_update = False;
 
-foreach ($json["messages"] as &$message) {
+foreach ($json["messages"] as $key => &$message) {
     if ($message["author"] != $_SESSION["username"]) {
-        if (!$message["read"]) {
-            $message["read"] = True;
-            echo "<div class='message other-message'>" . htmlspecialchars($message["content"]) . "</div>";
+        if ($message["status"] == "DELETED") {
+            unset($json["messages"][$key]);
+            $need_update = True;
+        } else {
+            if (!$message["read"]) {
+                $need_update = True;
+                $message["read"] = True;
+                echo "<div class='message other-message'>" . htmlspecialchars($message["content"]) . "</div>";
+            }
         }
-    }
+    }  
 }
 
+if ($need_update) {
 // Réencoder le tableau en JSON
 $newJson = json_encode($json, JSON_PRETTY_PRINT);
 
 // Écrire le contenu JSON modifié dans le fichier
 file_put_contents($ChannelFile, $newJson);
+}
 }
 
 
