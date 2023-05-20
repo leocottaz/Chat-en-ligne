@@ -1,22 +1,19 @@
 ---- 20 Mai 2023 ----
-    --- V0.3 ---
--- Delete Messages --
+   --- V0.3.1 ---
+    -- Patch --
 
-Nouvelles fonctionnalités :                   () = comment tester
-    - Ajout de la possibilité de supprimer ses propres messages
-    (cliquer sur le bouton à côté du bouton envoyer et ensuite cliquer sur le bouton delete
-    du message associé)
+Ajouts :                   () = comment tester
+    /////////////////////
+
 
 Modifications :                   () = changement pour l'utilisateur
-    - Changement du texte dans le titre de l'onglet lorsque l'utilisateur n'a pas l'onglet actif
-    (Titre de la page différent)
-    - Les scripts JS pour les requêtes Ajax et l'initialisation de la page ont été déplacé
-    pour ne pas complexifier le fichier main.php.
-    (Aucun)
+    /////////////////////
+
 
 Bugs résolus :
-    - Le tchat descend vers le bas automatiquement toute les secondes même si l'utilisateur
-    n'a pas reçu de messages
+    - Dès qu'un utilisateur supprime un message, ce dernier ne
+      disparaitras pas chez son ami
+
 
 Bugs non résolus :
     /////////////////////

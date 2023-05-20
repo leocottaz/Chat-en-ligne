@@ -34,6 +34,11 @@ function RefreshMessage() {
             data: {'ch' : params.get('ch')},
             success: function(response) {
                 if (response.trim().length !== 0) {
+                    if (response[0] == "R") {
+                        var result = response.substring(2);
+                        const message = document.querySelector('.message[messageId="'+ result +'"]');
+                        message.remove();
+                    }
                     $('.tchat').append(response);
                     scrollToBottom();
                 } 
