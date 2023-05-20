@@ -83,6 +83,12 @@ function tchat($json_file) {
                 <div class='message other-message'>$content</div>
                 ";
             }
+        } else {
+            if ($author == $_SESSION["username"]) {
+                echo "
+                <div class='message user-message'>$content</div>
+                ";
+            }
         }
     }
     } else { //Aucun tchat ouvert par l'utilisateur
