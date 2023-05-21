@@ -1,18 +1,24 @@
----- 20 Mai 2023 ----
-   --- V0.3.1 ---
-    -- Patch --
+---- 21 Mai 2023 ----
+   --- V0.3.2 ---
+ -- Status Update --
 
-Ajouts :                   () = comment tester
+Ajouts :
+    - Possibilité de voir dès qu'un utilisateur est sur la discussion
+        ↳ Ajout des status (DISCONNECTED et CONNECTED) dans les bases de données utilisateurs
+        (Voir dès qu'un utilisateur est sur la discussion)
+        ↳ Detection du serveur dès que l'utilisateur quitte et/ou change de conversation
+
+
+Modifications :
     /////////////////////
 
 
-Modifications :                   () = changement pour l'utilisateur
-    /////////////////////
+Suppressions :  
+    - Suppression des ids des utilisateurs dans les bases de données des conversations
 
 
 Bugs résolus :
-    - Dès qu'un utilisateur supprime un message, ce dernier ne
-      disparaitras pas chez son ami
+    /////////////////////
 
 
 Bugs non résolus :

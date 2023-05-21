@@ -28,7 +28,7 @@ function friend_list($json_file) {
 
         echo "
         <li class='friend'>
-         <a href='main.php?ch=$friend_id'>$friend_name <br> $friend_conversation_text</a>
+         <a href='main.php?ch=$friend_id' onclick='QuitConversation()'>$friend_name <br> $friend_conversation_text</a>
         </li>";
     }
 }
@@ -95,6 +95,28 @@ function tchat($json_file) {
     } else { //Aucun tchat ouvert par l'utilisateur
         echo "Aucun tchat d'ouvert";
         echo '<style> .message_form_container { display: none; } </style>';
+    }
+}
+
+function top_bar($json_file) {
+    if (isset($_GET["ch"]) and !empty($_GET["ch"])) {
+        $json = getAllUsers($json_file);
+        $user = getUser($_SESSION["username"], $json_file);
+        $Channel = $_GET["ch"];
+        $ChannelFile = '../data/conversation/' . $Channel . ".json";
+        $decode = file_get_contents($ChannelFile);
+        $json = json_decode($decode, true);
+
+        foreach ($json["header"]["user"] as $username => $status) {
+            if ($username !== $_SESSION["username"]) {
+                echo "<h3>$username</h3>";
+                if ($status[0] == "DISCONNECTED") {
+                    echo "<div style='background-color: red;' class='connexion_badge'></div>";
+                } else {
+                    echo "<div style='background-color: green;' class='connexion_badge'></div>";
+                }
+            }
+        }
     }
 }
 ?>

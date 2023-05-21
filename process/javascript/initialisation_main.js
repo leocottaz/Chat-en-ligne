@@ -43,5 +43,11 @@ window.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// SI l'UTILISATEUR FERME SON NAVIGATEUR OU L'ONGLET ON LE DECONNECTE DE LA CONVERSATION
+window.addEventListener("beforeunload", function(event) {
+  QuitConversation();
+  event.preventDefault(); // Cette ligne est facultative et peut être utilisée pour demander une confirmation à l'utilisateur avant la fermeture de la page
+});
+
 // On regarde si de nouveaux messages sont en arrivés toute les secondes
 setInterval(RefreshMessage, 1000);

@@ -7,6 +7,21 @@ $decode = file_get_contents($ChannelFile);
 $json = json_decode($decode, true);
 $need_update = False;
 
+if ($json["header"]["user"][$_SESSION["username"]][0] == "DISCONNECTED") {
+    $json["header"]["user"][$_SESSION["username"]][0] = "CONNECTED";
+    $need_update = True;
+}
+
+foreach ($json["header"]["user"] as $username => $status) {
+    if ($username !== $_SESSION["username"]) {
+        if ($status[0] == "DISCONNECTED") {
+            echo "S D";
+        } else {
+            echo "S C";
+        }
+    }
+}
+
 foreach ($json["messages"] as $key => &$message) {
     $Id = strval($message["id"]);
     if ($message["author"] != $_SESSION["username"]) {
