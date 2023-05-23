@@ -1,24 +1,29 @@
----- 21 Mai 2023 ----
-   --- V0.3.2 ---
- -- Status Update --
+---- 23 Mai 2023 ----
+   --- V0.3.3 ---
+    -- Patch --
 
 Ajouts :
-    - Possibilité de voir dès qu'un utilisateur est sur la discussion
-        ↳ Ajout des status (DISCONNECTED et CONNECTED) dans les bases de données utilisateurs
-        (Voir dès qu'un utilisateur est sur la discussion)
-        ↳ Detection du serveur dès que l'utilisateur quitte et/ou change de conversation
-
-
-Modifications :
     /////////////////////
 
 
-Suppressions :  
-    - Suppression des ids des utilisateurs dans les bases de données des conversations
+Modifications :                   () = changements pour l'utilisateur
+    - Réorganisation de plusieurs script JS dans le main.php
+    (Aucun)
 
 
-Bugs résolus :
-    /////////////////////
+Suppression :  
+    - Message d'erreur lorsque le serveur met du temps à répondre car ça peut être fréquent
+
+
+Bugs résolus :                   () = comment reproduire le bug
+    - Aucune réception des messages sauf rechargement de la page,
+    - Impossible de traiter plusieurs suppressions/réceptions de messages simultanément
+    (L'autre utilisateur doit envoyer/supprimer beaucoup de messages rapidement),
+    - Affichage de la barre même si aucune discussion n'est ouverte,
+    - Badge de connexion qui s'affiche deux fois,
+    - "Statut" qui ne se met pas à jour si l'autre utilisateur est sur mobile notamment pour
+    le passage en hors ligne,
+    - Non gestion des erreurs pour RefreshConversation et QuitConversation.
 
 
 Bugs non résolus :

@@ -25,38 +25,25 @@ function SendMessage() {
     });
 }
 
-function RefreshMessage() {
+function RefreshConversation() {
     if (params.has('ch')) {
+        if (document.visibilityState === "visible") {
         // Effectuez la requête Ajax
         $.ajax({
-            url: '../process/conversation/refresh_message.php',
+            url: '../process/conversation/refresh_conversation.php',
             method: 'POST',
             data: {'ch' : params.get('ch')},
             success: function(response) {
-                if (response.trim().length !== 0) {
-                    if (response[0] == "R") {
-                        var result = response.substring(2);
-                        const message = document.querySelector('.message[messageId="'+ result +'"]');
-                        message.remove();
-                    } else if((response[0] == "S")) {
-                        var status = document.querySelector('.connexion_badge');
-                        if (response[2] == "C") {
-                            status.style.backgroundColor = 'green';
-                        } else {
-                            status.style.backgroundColor = 'red';
-                        }
-                    } else {
-                        $('.tchat').append(response);
-                        scrollToBottom();
-                    }
-                } 
+                PostRefreshConversation(response);  
             },
             error: function(xhr, status, error) {
                 console.log(error);
                 $('.tchat').append("<div class='message error-message'> Une erreur est survenue lors de la réception d'un message </div>");
                 scrollToBottom();
             }
-        });
+            });
+          }
+        
     }
 }
 
@@ -83,12 +70,6 @@ function QuitConversation() {
     $.ajax({
         url: '../process/conversation/quit_conversation.php',
         method: 'POST',
-        data: { 'ch' : params.get('ch') },
-        success: function(response) {
-            console.log(response)
-        },
-        error: function(xhr, status, error) {
-            console.log(error)
-        }
+        data: { 'ch' : params.get('ch') }
     });
 }

@@ -1,3 +1,5 @@
+var DeleteButtonDisplay = false;
+
 // Fonction pour descendre dans le tchat le plus bas possible
 function scrollToBottom() {
     var chatContainer = document.querySelector('.tchat');
@@ -10,11 +12,21 @@ function scrollToBottom() {
 function ButtonDeleteClicked() {
     const ButtonsDelete = document.querySelectorAll('.delete_button');
 
-    ButtonsDelete.forEach(function(button) {
+    if (DeleteButtonDisplay == false) {
+      ButtonsDelete.forEach(function(button) {
       // Modifier le style de chaque bouton
       button.style.display = 'block';
+      DeleteButtonDisplay = true;
     });
-};
+    } else {
+      ButtonsDelete.forEach(function(button) {
+      // Modifier le style de chaque bouton
+      button.style.display = 'none';
+      DeleteButtonDisplay = false;
+    });
+    
+  };
+}
 
 // Titre en fonction de si l'onglet est actif ou non
 document.addEventListener("visibilitychange", function() {
@@ -22,7 +34,7 @@ document.addEventListener("visibilitychange", function() {
       // L'utilisateur est actuellement sur la page
       document.title = "Shadwow's Chat";
     } else {
-      // L'utilisateur est actuellement sur un autre onglet ou une autre fenêtre
+      QuitConversation();
       document.title = "Vous nous manquez :(";
     }
   });
@@ -50,4 +62,28 @@ window.addEventListener("beforeunload", function(event) {
 });
 
 // On regarde si de nouveaux messages sont en arrivés toute les secondes
-setInterval(RefreshMessage, 1000);
+setInterval(RefreshConversation, 1000);
+
+
+// TRAITEMENT DES REPONSES DE REQUETES AJAX
+
+function PostRefreshConversation(response){
+  response = response.split("<!!delimiter!!>")
+  response.forEach(function(element) {
+    if (element[0] == "R") {
+      var result = element.substring(2);
+      const message = document.querySelector('.message[messageId="'+ result +'"]');
+      message.remove();
+    } else if (element[0] == "S") {
+      var status = document.querySelector('.connexion_badge');
+      if (element[2] == "C") {
+          status.style.backgroundColor = 'green';
+      } else {
+          status.style.backgroundColor = 'red';
+      }
+    } else {
+      $('.tchat').append(element);
+      scrollToBottom();
+    }
+  });
+}

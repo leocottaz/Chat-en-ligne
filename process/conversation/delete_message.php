@@ -28,24 +28,6 @@ try {
     echo "<div class='message error-message'> Une erreur est survenue lors de la suppression du message </div>" . $e;
 }
 
-/*
-// Parcourir les messages pour trouver l'élément avec l'ID 10
-foreach ($json['messages'] as $key => $message) {
-    if ($message['id'] == $MessageId) {
-        unset($json['messages'][$key]);
-        break;
-    }
-}
-
-// Réorganiser les clés du tableau des messages
-$json['messages'] = array_values($json['messages']);
-
-$newJson = json_encode($json, JSON_PRETTY_PRINT);
-
-// Écrire le contenu JSON modifié dans le fichier
-file_put_contents($ChannelFile, $newJson);
-*/
-
 
 
 

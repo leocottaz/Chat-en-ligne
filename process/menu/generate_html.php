@@ -95,6 +95,7 @@ function tchat($json_file) {
     } else { //Aucun tchat ouvert par l'utilisateur
         echo "Aucun tchat d'ouvert";
         echo '<style> .message_form_container { display: none; } </style>';
+        echo '<style> .top_bar { display: none; } </style>';
     }
 }
 

@@ -37,12 +37,11 @@ if ($connected[0] == False) {
   </div>
 
   <div class="container_tchat">
-    <div class="top_bar">
-    <?php
-    top_bar("../data/users.json");  
-    ?>
+    <div class='top_bar'>
+      <?php
+      top_bar("../data/users.json");  
+      ?>
     </div>
-
 
   <div class="tchat">
   <?php
