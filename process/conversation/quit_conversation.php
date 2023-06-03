@@ -21,8 +21,10 @@ $newJson = json_encode($json, JSON_PRETTY_PRINT);
 
 // Écrire le contenu JSON modifié dans le fichier
 file_put_contents($ChannelFile, $newJson);
+
 } catch (Exception $e) {
-    echo $e;
+    http_response_code(500);
+    exit;
 }
 
 ?>

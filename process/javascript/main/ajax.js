@@ -3,8 +3,8 @@ const params = new URLSearchParams(window.location.search);
 function SendMessage() {
     var input = document.querySelector('.message_input');
     var MessageContent = input.value;
-    
-    // Effectuez la requête Ajax
+
+        // Effectuez la requête Ajax
     $.ajax({
         url: '../process/conversation/send_message.php',
         method: 'POST',
@@ -22,7 +22,7 @@ function SendMessage() {
             $('.tchat').append("<div class='message error-message'> Une erreur est survenue lors de l'envoi de votre message </div>");
             scrollToBottom();
         }
-    });
+    });   
 }
 
 function RefreshConversation() {
@@ -38,8 +38,6 @@ function RefreshConversation() {
             },
             error: function(xhr, status, error) {
                 console.log(error);
-                $('.tchat').append("<div class='message error-message'> Une erreur est survenue lors de la réception d'un message </div>");
-                scrollToBottom();
             }
             });
           }
@@ -60,6 +58,23 @@ function DeleteMessage(MessageId) {
         error: function(xhr, status, error) {
             console.log(error);
             $('.tchat').append("<div class='message error-message'> Une erreur est survenue lors de la suppression d'un message </div>");
+            scrollToBottom();
+        }
+    });
+}
+
+function SendWallpaperModification(color) {
+    // Effectuez la requête Ajax
+    $.ajax({
+        url: '../process/conversation/change_wallpaper.php',
+        method: 'POST',
+        data: { 'ch' : params.get('ch'), 'color': color },
+        success: function(response) {
+            ChangeWallpaper(response)
+        },
+        error: function(xhr, status, error) {
+            console.log(error);
+            $('.tchat').append("<div class='message error-message'> Nous n'avons pas réussi à changer la couleur du tchat </div>");
             scrollToBottom();
         }
     });

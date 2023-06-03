@@ -1,30 +1,31 @@
----- 23 Mai 2023 ----
-   --- V0.3.3 ---
-    -- Patch --
+     --- V0.4 ---
+---- Wallpaper Update ----
 
-Ajouts :
-    /////////////////////
+Ajout :                   [] = comment tester
+    - Ajout d'un système de commande,
+        ↳ Possibilité de changer la couleur du tchat. [/color dans le tchat].
 
 
-Modifications :                   () = changements pour l'utilisateur
-    - Réorganisation de plusieurs script JS dans le main.php
-    (Aucun)
+Modifications :                   [] = changement pour l'utilisateur
+    - Système de traitement des erreurs (requête Ajax) amélioré,
+    [l'utilisateur n'aura jamais de requête sans réponse]
+    - La couleur de base de la liste d'amis à été modifiée,
 
 
 Suppression :  
-    - Message d'erreur lorsque le serveur met du temps à répondre car ça peut être fréquent
+    /////////////////////
 
 
-Bugs résolus :                   () = comment reproduire le bug
-    - Aucune réception des messages sauf rechargement de la page,
-    - Impossible de traiter plusieurs suppressions/réceptions de messages simultanément
-    (L'autre utilisateur doit envoyer/supprimer beaucoup de messages rapidement),
-    - Affichage de la barre même si aucune discussion n'est ouverte,
-    - Badge de connexion qui s'affiche deux fois,
-    - "Statut" qui ne se met pas à jour si l'autre utilisateur est sur mobile notamment pour
-    le passage en hors ligne,
-    - Non gestion des erreurs pour RefreshConversation et QuitConversation.
-
+Bugs résolus :
+    - "Une erreur est survenue lors de la réception d'un message" s'affiche régulièrement pour
+    aucune raison,
+    - Les messages ne se suppriment pas de la base de données si l'autre utilisateur ne les as
+    pas encore vu,
+    - Pendant une très courte période au chargement de la page, on peut voir les messages
+    supprimé recemment,
+    - La barre supérieur, le tchat, et le formulaire de message ne prennent pas toute la 
+    hauteur de la page,
+    
 
 Bugs non résolus :
     /////////////////////

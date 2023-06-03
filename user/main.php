@@ -1,6 +1,7 @@
 <?php 
 session_start();
 include "../process/auth/verification.php";
+include '../process/menu/generate_html.php';
 
 $connected = connected("../data/users.json");
 
@@ -20,17 +21,17 @@ if ($connected[0] == False) {
   <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="../style/main.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="../process/javascript/ajax.js"></script>
-  <script src="../process/javascript/initialisation_main.js"></script>
+  <script src="../process/javascript/main/ajax.js"></script>
+  <script src="../process/javascript/main/initialisation_main.js"></script>
 </head>
 
 <body>
   
 <div class="container">
   <div class="div_friend_list">
+  <!-- <a href="friend.php"><button class="search_friend_button"></button></a> -->
     <ul class="friend_list">
     <?php
-    include '../process/menu/generate_html.php';
     friend_list("../data/users.json");  
     ?>
     </ul>
@@ -54,7 +55,7 @@ if ($connected[0] == False) {
       <!-- Champ pour le message -->
       <input type="text" class="message_input" placeholder="Tapez votre message ici">
        <!-- Bouton pour envoyer le message -->
-    <button class="submit" onclick="SendMessage()">Envoyer</button>
+    <button class="submit" onclick="ContentInput()">Envoyer</button>
     <button class="delete" onclick="ButtonDeleteClicked()"></button>
     </div>
   </div>

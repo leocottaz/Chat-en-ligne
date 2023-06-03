@@ -1,5 +1,10 @@
 <?php 
 
+function errorHandler($severity, $message, $file, $line) {
+    throw new ErrorException($message, 0, $severity, $file, $line);
+}
+set_error_handler('errorHandler');
+
 /**
  * Renvoie le code html de la liste d'ami
  */
@@ -28,7 +33,7 @@ function friend_list($json_file) {
 
         echo "
         <li class='friend'>
-         <a href='main.php?ch=$friend_id' onclick='QuitConversation()'>$friend_name <br> $friend_conversation_text</a>
+         <a class='friend_a' href='main.php?ch=$friend_id' onclick='QuitConversation()'>$friend_name <br> $friend_conversation_text</a>
         </li>";
     }
 }
@@ -50,13 +55,6 @@ function tchat($json_file) {
             }
         }
 
-
-        // GESTION DE TOUTE LES ERREURS ET AVESTISSEMENTS DANS LE TRY {} D'APRES
-        function errorHandler($severity, $message, $file, $line) {
-            throw new ErrorException($message, 0, $severity, $file, $line);
-        }
-        set_error_handler('errorHandler');
-
         $conversation_file_path = '../data/conversation/' . $_GET["ch"] . ".json";
         if ($exist == True and file_exists($conversation_file_path)) {
             
@@ -65,11 +63,14 @@ function tchat($json_file) {
             
         } else {
                 echo "Impossible d'acceder à la discussion";
+                echo '<style> .top_bar { display: none; } </style>';
+                echo '<style> .message_form_container { display: none; } </style>';
                 exit;
         }
         
         foreach ($conversation["messages"] as $message) {
             $author = $message["author"];
+            $status = $message["status"];
             $id = $message["id"];
             $content = $message["content"];
             $read = $message["read"];
@@ -80,9 +81,11 @@ function tchat($json_file) {
                 <div class='message user-message' messageId='$id'><button class='delete_button' onclick='DeleteMessage($id)'>Delete</button>$content</div>
                 ";
             } else {
+                if ($status !== "DELETED") {
                 echo "
                 <div class='message other-message' messageId='$id'>$content</div>
                 ";
+                }
             }
         } else {
             if ($author == $_SESSION["username"]) {
@@ -101,6 +104,7 @@ function tchat($json_file) {
 
 function top_bar($json_file) {
     if (isset($_GET["ch"]) and !empty($_GET["ch"])) {
+        try {
         $json = getAllUsers($json_file);
         $user = getUser($_SESSION["username"], $json_file);
         $Channel = $_GET["ch"];
@@ -118,6 +122,9 @@ function top_bar($json_file) {
                 }
             }
         }
+        } catch (Exception $e) {
+            
+    }
     }
 }
 ?>

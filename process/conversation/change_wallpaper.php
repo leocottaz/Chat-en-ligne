@@ -6,35 +6,27 @@ function errorHandler($severity, $message, $file, $line) {
 set_error_handler('errorHandler');
 
 try {
-    $MessageId = $_POST["id"];
-    $Channel = $_POST["ch"];    
+    $Channel = $_POST["ch"];
+    $Color = $_POST["color"];
     $ChannelFile = '../../data/conversation/' . $Channel . ".json";
     $decode = file_get_contents($ChannelFile);
     $json = json_decode($decode, true);
 
-    foreach ($json['messages'] as &$message) {
-        if ($message['id'] == $MessageId) {
-            $message["status"] = "DELETED";
-            break;
-        }
-    }
+    // Ajout du nouveau message au tableau "messages"
+    $json['header']["color"] = $Color;
 
-    $newJson = json_encode($json, JSON_PRETTY_PRINT);
+    // Conversion du tableau associatif en JSON
+    $jsonUpdated = json_encode($json, JSON_PRETTY_PRINT);   
 
-    // Écrire le contenu JSON modifié dans le fichier
-    file_put_contents($ChannelFile, $newJson);
-
+    // Écriture du contenu JSON dans le fichier
+    file_put_contents($ChannelFile, $jsonUpdated); 
+    
+    echo $Color;
+    
 } catch (Exception $e) {
     http_response_code(500);
     exit;
 }
-
-
-
-
-
-
-
 
 
 

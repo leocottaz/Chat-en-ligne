@@ -37,12 +37,13 @@ try {
 
     // Écriture du contenu JSON dans le fichier
     file_put_contents($ChannelFile, $jsonUpdated); 
+    echo "<div class='message user-message' messageId='$MessageId'><button class='delete_button' onclick='DeleteMessage($MessageId)'>Delete</button>" . htmlspecialchars($MessageContent) . "</div>";
     }
+    
 } catch (Exception $e) {
-    echo "<div class='message error-message'> Une erreur est survenue lors de l'envoi de votre message </div>" . $e;
+    http_response_code(500);
+    exit;
 }
-
-echo "<div class='message user-message' messageId='$MessageId'><button class='delete_button' onclick='DeleteMessage($MessageId)'>Delete</button>" . htmlspecialchars($MessageContent) . "</div>";
 
 
 

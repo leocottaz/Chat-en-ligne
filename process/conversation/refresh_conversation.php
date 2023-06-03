@@ -6,6 +6,7 @@ function errorHandler($severity, $message, $file, $line) {
 set_error_handler('errorHandler');
 
 try {
+
 if (!empty($_POST["ch"])) {
 $Channel = $_POST["ch"];
 $ChannelFile = '../../data/conversation/' . $Channel . ".json";
@@ -28,6 +29,12 @@ foreach ($json["header"]["user"] as $username => $status) {
     }
 }
 
+echo "<!!delimiter!!>";
+// On envoie la couleur dominante de la discussion
+$color = $json['header']['color'];
+echo "C $color";
+echo "<!!delimiter!!>";
+
 foreach ($json["messages"] as $key => &$message) {
     $Id = strval($message["id"]);
     if ($message["author"] != $_SESSION["username"]) {
@@ -44,7 +51,7 @@ foreach ($json["messages"] as $key => &$message) {
                 echo "<div class='message other-message' messageId='$Id'>" . htmlspecialchars($message["content"]) . "</div>\n";
             }
         }
-    }  
+    }
 }
 
 if ($need_update) {
@@ -57,7 +64,8 @@ file_put_contents($ChannelFile, $newJson);
 }
 
 } catch (Exception $e) {
-    echo "<div class='message error-message'> Une erreur est survenue</div>" . $e;
+    http_response_code(500);
+    exit;
 }
 
 

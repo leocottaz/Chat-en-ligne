@@ -56,6 +56,8 @@ h3 {
 
 .message_form {
   width: 100%;
+  height: 60px;
+  flex: 2;
   display: flex;
   flex-direction: row;
 }
@@ -88,13 +90,27 @@ h3 {
   background-position: center center;
 }
 
+.search_friend_button {
+  background-image: url('./image/icon/friend_search.png');
+  border: none;
+  outline: none;
+  box-shadow: none;
+  padding-inline: 30px;
+  margin: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
 .div_friend_list {
   overflow-y: scroll;
   overflow-x: hidden;
   width: 20vw;
   padding-inline: 10px;
   height: 100vh;
-  background-color: blue;
+  background-color: #292929;
 }
 
 .friend_list {
@@ -103,23 +119,20 @@ h3 {
   padding: 0;
 }
 
-.friend {
+.friend_a {
   margin: 10px 0;
   border: 1px solid #ccc;
-  background-color: red;
-}
-
-.friend a {
   text-decoration: none;
   padding: 10px;
   display: block;
   text-decoration: none;
-  color: #333;
+  color: white;
+  background-color: rgba(41, 41, 41, 0.5);
   height: 100%;
   width: 100%;
 }
 
-.friend a:hover {
+.friend_a:hover {
   text-decoration: underline;
 }
 
@@ -132,13 +145,13 @@ h3 {
 .tchat {
   width: 100%;
   max-width: 100%;
-  min-height: 83vh;
+  height: 100%;
   overflow-y: auto;
 }
 
 /* Style des messages */
 .message {
-  backdrop-filter: blur(10px); /* Flou gaussien appliqué à l'arrière-plan */
+  backdrop-filter: blur(3px); /* Flou gaussien appliqué à l'arrière-plan */
   font-size: 20px;
   padding: 15px;
   margin: 20px;
@@ -150,7 +163,14 @@ h3 {
 .user-message {
   border-radius: 20px 20px 2px 20px;
   text-align: right;
-  background-color: rgba(41, 41, 41, 0.7);
+  background-color: rgba(41, 41, 41, 0.5);
+  margin-bottom: 5px;
+}
+
+.other-message {
+  border-radius: 20px 20px 20px 2px;
+  text-align: left;
+  background-color: rgba(73, 73, 73, 0.5);
   margin-bottom: 5px;
 }
 
@@ -159,13 +179,6 @@ h3 {
   border-radius: 20px;
   text-align: center;
   background-color: rgba(36, 3, 3, 0.5);
-  margin-bottom: 5px;
-}
-
-.other-message {
-  border-radius: 20px 20px 20px 2px;
-  text-align: left;
-  background-color: rgba(73, 73, 73, 0.7);
   margin-bottom: 5px;
 }
 
