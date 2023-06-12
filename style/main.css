@@ -154,24 +154,28 @@ h3 {
   backdrop-filter: blur(3px); /* Flou gaussien appliqué à l'arrière-plan */
   font-size: 20px;
   padding: 15px;
-  margin: 20px;
+  margin: 15px;
+  margin-bottom: 0px;
   color: white;
   word-wrap: break-word;
 }
 
+.tchat-delimiter {
+  background-color: rgba(54, 54, 54, 0.5);
+  border-radius: 20px 20px 20px 20px;
+}
+
 /* Style des messages de l'utilisateur */
 .user-message {
-  border-radius: 20px 20px 2px 20px;
+  border-radius: 20px 20px 1px 20px;
   text-align: right;
-  background-color: rgba(41, 41, 41, 0.5);
-  margin-bottom: 5px;
+  background-color: rgba(31, 31, 31, 0.5);
 }
 
 .other-message {
-  border-radius: 20px 20px 20px 2px;
+  border-radius: 20px 20px 20px 1px;
   text-align: left;
-  background-color: rgba(73, 73, 73, 0.5);
-  margin-bottom: 5px;
+  background-color: rgba(77, 77, 77, 0.5);
 }
 
 /* Style des messages de l'utilisateur */
@@ -193,4 +197,14 @@ h3 {
   padding: 10px;
   color: white;
   border-radius: 10px;
+}
+
+.color_badge {
+  border-radius: 50px;
+  display: inline-block;
+  margin-left: 5px;
+  margin: 5px;
+  vertical-align: middle;
+  width: 20px;
+  height: 20px;
 }

@@ -6,33 +6,23 @@ function errorHandler($severity, $message, $file, $line) {
 set_error_handler('errorHandler');
 
 /**
- * Renvoie le code html de la liste d'ami
+ * Renvoie le code HTML de la liste d'amis
  */
-
 function friend_list($json_file) {
-    
     $json = getAllUsers($json_file);
     $user = getUser($_SESSION["username"], $json_file);
 
     if (empty($user["friends"])) {
-        echo "
-        Aucun ami trouvé
-        ";
+        echo "Aucun ami trouvé";
         exit;
     }
 
     foreach ($user["friends"] as $friend) {
-        $friend_id = $friend[1];
-        $friend_name = $friend[0];
-        $friend_conversation = $friend[2];
-        $friend_conversation_text = "Discussion ouverte";
+        [$friend_name, $friend_id, $friend_conversation] = $friend;
+        $friend_conversation_text = $friend_conversation ? "Discussion ouverte" : "Aucune discussion ouverte";
+        $friend_conversation_text = htmlspecialchars($friend_conversation_text);
 
-        if ($friend_conversation == False) {
-            $friend_conversation_text = "Aucune discussion ouverte";
-        }
-
-        echo "
-        <li class='friend'>
+        echo "<li class='friend'>
          <a class='friend_a' href='main.php?ch=$friend_id' onclick='QuitConversation()'>$friend_name <br> $friend_conversation_text</a>
         </li>";
     }
@@ -71,30 +61,31 @@ function tchat($json_file) {
         foreach ($conversation["messages"] as $message) {
             $author = $message["author"];
             $status = $message["status"];
+            $system = $message["system"];
             $id = $message["id"];
             $content = $message["content"];
             $read = $message["read"];
 
             if ($read) {
-            if ($author == $_SESSION["username"]) {
-                echo "
-                <div class='message user-message' messageId='$id'><button class='delete_button' onclick='DeleteMessage($id)'>Delete</button>$content</div>
-                ";
-            } else {
                 if ($status !== "DELETED") {
-                echo "
-                <div class='message other-message' messageId='$id'>$content</div>
-                ";
+                    if ($author == $_SESSION["username"]) { 
+                        if($system) {
+                            echo "
+                            <div class='message user-message'>$content</div>
+                            ";  
+                        } else {
+                            echo "
+                            <div class='message user-message' messageId='$id'><button class='delete_button' onclick='DeleteMessage($id)'>Delete</button>$content</div>
+                            ";
+                        }
+                    } else {
+                        echo "
+                        <div class='message other-message' messageId='$id'>$content</div>
+                        ";
+                    }
                 }
             }
-        } else {
-            if ($author == $_SESSION["username"]) {
-                echo "
-                <div class='message user-message' messageId='$id'><button class='delete_button' onclick='DeleteMessage($id)'>Delete</button>$content</div>
-                ";
-            }
         }
-    }
     } else { //Aucun tchat ouvert par l'utilisateur
         echo "Aucun tchat d'ouvert";
         echo '<style> .message_form_container { display: none; } </style>';
@@ -103,28 +94,26 @@ function tchat($json_file) {
 }
 
 function top_bar($json_file) {
-    if (isset($_GET["ch"]) and !empty($_GET["ch"])) {
+    if (isset($_GET["ch"]) && !empty($_GET["ch"])) {
         try {
-        $json = getAllUsers($json_file);
-        $user = getUser($_SESSION["username"], $json_file);
-        $Channel = $_GET["ch"];
-        $ChannelFile = '../data/conversation/' . $Channel . ".json";
-        $decode = file_get_contents($ChannelFile);
-        $json = json_decode($decode, true);
+            $json = getAllUsers($json_file);
+            $user = getUser($_SESSION["username"], $json_file);
+            $Channel = $_GET["ch"];
+            $ChannelFile = '../data/conversation/' . $Channel . ".json";
+            $decode = file_get_contents($ChannelFile);
+            $json = json_decode($decode, true);
 
-        foreach ($json["header"]["user"] as $username => $status) {
-            if ($username !== $_SESSION["username"]) {
-                echo "<h3>$username</h3>";
-                if ($status[0] == "DISCONNECTED") {
-                    echo "<div style='background-color: red;' class='connexion_badge'></div>";
-                } else {
-                    echo "<div style='background-color: green;' class='connexion_badge'></div>";
+            foreach ($json["header"]["user"] as $username => $status) {
+                if ($username !== $_SESSION["username"]) {
+                    echo "<h3>" . htmlspecialchars($username) . "</h3>";
+
+                    $badge_color = $status[0] == "DISCONNECTED" ? "red" : "green";
+                    echo "<div style='background-color: $badge_color;' class='connexion_badge'></div>";
                 }
             }
-        }
         } catch (Exception $e) {
-            
-    }
+            // Gérer l'exception
+        }
     }
 }
 ?>

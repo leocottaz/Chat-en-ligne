@@ -1,11 +1,11 @@
 <?php 
 session_start();
 include "../process/auth/verification.php";
-include '../process/menu/generate_html.php';
+include '../process/conversation/generate_html.php';
 
 $connected = connected("../data/users.json");
 
-if ($connected[0] == False) {
+if (!$connected[0]) {
   header("Location: ../login.php");
 }
 ?> 

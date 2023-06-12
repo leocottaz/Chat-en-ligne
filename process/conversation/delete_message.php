@@ -1,16 +1,22 @@
 <?php 
 session_start();
+
 function errorHandler($severity, $message, $file, $line) {
     throw new ErrorException($message, 0, $severity, $file, $line);
 }
+
 set_error_handler('errorHandler');
 
 try {
     $MessageId = $_POST["id"];
-    $Channel = $_POST["ch"];    
+    $Channel = $_POST["ch"];
     $ChannelFile = '../../data/conversation/' . $Channel . ".json";
-    $decode = file_get_contents($ChannelFile);
-    $json = json_decode($decode, true);
+
+    if (!file_exists($ChannelFile)) {
+        throw new Exception('Conversation file does not exist');
+    }
+
+    $json = json_decode(file_get_contents($ChannelFile), true);
 
     foreach ($json['messages'] as &$message) {
         if ($message['id'] == $MessageId) {
@@ -28,14 +34,5 @@ try {
     http_response_code(500);
     exit;
 }
-
-
-
-
-
-
-
-
-
 
 ?>

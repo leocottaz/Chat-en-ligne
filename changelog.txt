@@ -1,15 +1,20 @@
-     --- V0.4 ---
----- Wallpaper Update ----
+        ---- 12 Juin 2023 ----
+            --- V0.4.1 ---
+---- Adjust & Optimization Update ----
 
-Ajout :                   [] = comment tester
-    - Ajout d'un système de commande,
-        ↳ Possibilité de changer la couleur du tchat. [/color dans le tchat].
+Ajouts :
+    - Ajout de message d'avertissement quand un utilisateur fais une action
+        ↳ Ajout d'un système côté serveur pour ajouter la possibilité d'avoir des messages 
+        insupprimables
 
 
 Modifications :                   [] = changement pour l'utilisateur
-    - Système de traitement des erreurs (requête Ajax) amélioré,
-    [l'utilisateur n'aura jamais de requête sans réponse]
-    - La couleur de base de la liste d'amis à été modifiée,
+    - Déplacement du fichier generate_html.php pour faciliter la comprehension de la structure du
+    site 
+    [Aucun]
+    - Une grosse partie de tout les scripts à été optimisée afin d'être executée plus
+    rapidement
+    - Prise en charge d'erreurs potentielles
 
 
 Suppression :  
@@ -17,15 +22,7 @@ Suppression :
 
 
 Bugs résolus :
-    - "Une erreur est survenue lors de la réception d'un message" s'affiche régulièrement pour
-    aucune raison,
-    - Les messages ne se suppriment pas de la base de données si l'autre utilisateur ne les as
-    pas encore vu,
-    - Pendant une très courte période au chargement de la page, on peut voir les messages
-    supprimé recemment,
-    - La barre supérieur, le tchat, et le formulaire de message ne prennent pas toute la 
-    hauteur de la page,
-    
-
-Bugs non résolus :
-    /////////////////////
+    - Le tchat reviens en bas toute les secondes même si aucun nouveau message n'est reçu
+    - Possibilité d'envoyer plusieurs fois le même message pendant que le précedent s'envoie
+    - Affichage de ses propres messages même si il est supprimé
+    - Si l'utilisateur change de couleur du tchat, l'autre ne reçoit plus aucun message après
