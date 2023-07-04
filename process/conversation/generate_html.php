@@ -11,20 +11,31 @@ set_error_handler('errorHandler');
 function friend_list($json_file) {
     $json = getAllUsers($json_file);
     $user = getUser($_SESSION["username"], $json_file);
+    $found = False;
 
     if (empty($user["friends"])) {
-        echo "Aucun ami trouvé";
-        exit;
-    }
+        echo "<li>Aucun ami trouvé</li>";
+    } else {
+        foreach ($user["friends"] as $friendName => $friendInfo) {
+        
+        $channel_id = $friendInfo["channel_id"];
+        $status = $friendInfo["status"];
 
-    foreach ($user["friends"] as $friend) {
-        [$friend_name, $friend_id, $friend_conversation] = $friend;
-        $friend_conversation_text = $friend_conversation ? "Discussion ouverte" : "Aucune discussion ouverte";
-        $friend_conversation_text = htmlspecialchars($friend_conversation_text);
+        if ($status === "OK") {
+        
+        $found = True;
 
         echo "<li class='friend'>
-         <a class='friend_a' href='main.php?ch=$friend_id' onclick='QuitConversation()'>$friend_name <br> $friend_conversation_text</a>
-        </li>";
+         <a class='friend_a' href='main.php?ch=$channel_id'>$friendName</a>
+        </li>"; 
+        }
+    }
+
+    if(!$found) {
+        echo "<li class='friend'>
+        <a class='friend_a' href='friend.php'>Aucun ami trouvé<br>Ajoutez en un !</a>
+       </li>";
+    }
     }
 }
 
@@ -40,7 +51,7 @@ function tchat($json_file) {
         $exist = False;
         
         foreach ($user["friends"] as $friend) {
-            if ($_GET["ch"] == $friend[1]) {
+            if ($_GET["ch"] == $friend["channel_id"]) {
                 $exist = True;
             }
         }
@@ -75,15 +86,35 @@ function tchat($json_file) {
                             ";  
                         } else {
                             echo "
-                            <div class='message user-message' messageId='$id'><button class='delete_button' onclick='DeleteMessage($id)'>Delete</button>$content</div>
+                            <div class='message user-message' messageId='$id'><button class='delete_button' onclick='DeleteMessage($id)'>Delete</button>" . htmlspecialchars($content) . "</div>
                             ";
                         }
                     } else {
+                        if($system) {
+                            echo "
+                            <div class='message other-message'>$content</div>
+                            ";  
+                        } else {
+                            echo "
+                            <div class='message other-message' messageId='$id'>" . htmlspecialchars($content) . "</div>
+                            ";
+                        }
+                    }
+                }
+            } else {
+                if ($status !== "DELETED") {
+                if ($author == $_SESSION["username"]) {
+                    if($system) {
                         echo "
-                        <div class='message other-message' messageId='$id'>$content</div>
+                        <div class='message user-message'>$content</div>
+                        ";  
+                    } else {
+                        echo "
+                        <div class='message user-message' messageId='$id'><button class='delete_button' onclick='DeleteMessage($id)'>Delete</button>" . htmlspecialchars($content) . "</div>
                         ";
                     }
                 }
+            }
             }
         }
     } else { //Aucun tchat ouvert par l'utilisateur

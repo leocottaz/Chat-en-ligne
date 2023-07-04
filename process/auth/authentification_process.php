@@ -27,13 +27,16 @@ function encrypt($text) {
 function generateToken() {
     $token = random_bytes(32);
     $token = bin2hex($token);
+    $token = strtoupper($token);
 
     // CREATION D'UNE ID UNIQUE EN FONCTION DE L'HORODATAGE
     $user_id = uniqid('', False); // On génère un username unique pour l'utilisateur avec la fonction uniqid() en lui passant comme préfixe "user_".
-    
+    $user_id = strtoupper($user_id);
+
     // Création d'une id privée
-    $bytes = random_bytes(15);
-    $private_id = bin2hex($bytes); // Convertir les bytes en une chaîne hexadécimale    
+    $private_id = random_bytes(15);
+    $private_id = bin2hex($private_id); // Convertir les bytes en une chaîne hexadécimale    
+    $private_id = strtoupper($private_id);
 
     return [$token, $user_id, $private_id];
 }
@@ -98,12 +101,15 @@ function register($username, $password, $remember) {
     // Récupération de l'utilisateur demandé
     $user = getUser($username);
     // Si l'utilisateur existe déjà, on arrête tout
-    if( $user ) {
+    if($user) {
         die( "L'utilisateur {$username} est déjà enregistré." );
     }
 
-    // Enregistrement du nouvel utilisateur
-    addUser($username, $password, $remember);
+    // Si le pseudo de l'utilisateur fais moins de 32 charactères
+    if(strlen($username) <= 32) {
+        // Enregistrement du nouvel utilisateur
+        addUser($username, $password, $remember);
+    }
 }
 
 /**

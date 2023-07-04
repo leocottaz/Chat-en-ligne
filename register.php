@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I & Wear - Créer un compte</title>
+    <title>Shadwow Chat - Bienvenue</title>
     <link rel="shortcut icon" href="">
     <link rel="stylesheet" href="/style/login.css">
+    <link rel="stylesheet" media="(max-width: 767px)" href="/style/phone/login.css">
 </head>
 
 <body>

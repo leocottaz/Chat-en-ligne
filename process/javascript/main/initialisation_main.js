@@ -48,6 +48,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
 // SI l'UTILISATEUR FERME SON NAVIGATEUR OU L'ONGLET ON LE DECONNECTE DE LA CONVERSATION
 window.addEventListener("beforeunload", function(event) {
+  event.preventDefault()
   QuitConversation();
   event.returnValue = ""; // Cette ligne est facultative et peut être utilisée pour afficher un message personnalisé dans certains navigateurs plus anciens
 });
@@ -172,7 +173,7 @@ function ChangeWallpaper(color) {
 
 // On regarde si la quelque chose dans la conversation à été modifié toute les secondes 
 // (message envoyé/supprimés, utilisateur sur la conversation ou non, couleur du tchat modifiés)
-setInterval(RefreshConversation, 1000);
+setInterval(RefreshConversation, 500);
 
 // TRAITEMENT DES REPONSES DE REQUETES AJAX
 

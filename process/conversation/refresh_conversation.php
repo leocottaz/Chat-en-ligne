@@ -20,14 +20,18 @@ try {
             $json = json_decode($decode, true);
             $need_update = false;
 
-            if ($json["header"]["user"][$_SESSION["username"]][0] == STATUS_DISCONNECTED) {
-                $json["header"]["user"][$_SESSION["username"]][0] = STATUS_CONNECTED;
-                $need_update = true;
+            if ($json["header"]["user"][$_SESSION["username"]][0] == "DISCONNECTED") {
+                $json["header"]["user"][$_SESSION["username"]][0] = "CONNECTED";
+                $need_update = True;
             }
-
+            
             foreach ($json["header"]["user"] as $username => $status) {
                 if ($username !== $_SESSION["username"]) {
-                    echo "S " . ($status[0] == STATUS_DISCONNECTED ? "D" : "C");
+                    if ($status[0] == "DISCONNECTED") {
+                        echo "S D";
+                    } else {
+                        echo "S C";
+                    }
                 }
             }
 

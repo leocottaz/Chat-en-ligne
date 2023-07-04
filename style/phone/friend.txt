@@ -1,0 +1,86 @@
+:root {
+    --color-body: #141414;
+    --color-nav: #1B3334;
+    --color-text: white;
+}
+
+html, body {
+    min-height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--color-body);
+    text-align: center;
+    overflow-y: hidden;
+    overflow-X: hidden;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.friend_form {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+  }
+  
+.friend_search_input {
+    width: 80%;
+    padding: 10px;
+    margin: 10px;
+    margin-left: 20px;
+    border-radius: 10px;
+  }
+  
+  .submit {
+    padding: 10px;
+    margin: 10px;
+    margin-left: 5px;
+    border-radius: 10px;
+  }
+
+  .div_friend_list {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: 20vw;
+    padding-inline: 10px;
+    height: 100vh;
+    background-color: blue;
+  }
+  
+  .friend_list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .friend {
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    background-color: red;
+  }
+  
+  .friend a {
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+    text-decoration: none;
+    color: #333;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .friend a:hover {
+    text-decoration: underline;
+  }
+  
+  .friend span {
+    font-size: 12px;
+    color: #999;
+    margin-left: 10px;
+  }

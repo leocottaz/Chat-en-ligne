@@ -20,8 +20,11 @@ try {
 
     foreach ($json['messages'] as &$message) {
         if ($message['id'] == $MessageId) {
-            $message["status"] = "DELETED";
-            break;
+            if ($message['author'] == $_SESSION['username']) {
+                $message["status"] = "DELETED";
+                break;
+            }
+            
         }
     }
 

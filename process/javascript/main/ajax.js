@@ -3,6 +3,9 @@ const params = new URLSearchParams(window.location.search);
 function SendMessage() {
     const input = document.querySelector('.message_input');
     const messageContent = input.value;
+    const tchatElement = document.querySelector('.tchat');
+    tchatElement.insertAdjacentHTML('beforeend', "<div class='message sending user-message'>" + encodeURIComponent(messageContent) + " </div>");
+    scrollToBottom();
     input.value = "";
 
     // Effectuez la requête Ajax
@@ -12,7 +15,12 @@ function SendMessage() {
         data: { 'content': messageContent, 'ch': params.get('ch') },
         success: function(response) {
             // Traitement de la réponse réussie ici
-            const tchatElement = document.querySelector('.tchat');
+            const elementASupprimer = tchatElement.querySelector('.message.sending.user-message');
+            // Vérifiez si l'élément existe avant de le supprimer
+            if (elementASupprimer) {
+                // Utilisez parentNode.removeChild() pour supprimer l'élément
+                tchatElement.removeChild(elementASupprimer);
+            }
             tchatElement.insertAdjacentHTML('beforeend', response);
             scrollToBottom();
             console.log("Un message a été envoyé :\n" + messageContent);
@@ -20,8 +28,14 @@ function SendMessage() {
         error: function(xhr, status, error) {
             console.log(error);
             input.value = messageContent;
-            const tchatElement = document.querySelector('.tchat');
-            tchatElement.insertAdjacentHTML('beforeend', "<div class='message error-message'> Une erreur est survenue lors de l'envoi de votre message </div>");
+            // Traitement de la réponse réussie ici
+            const elementASupprimer = tchatElement.querySelector('.message.sending.user-message');
+            // Vérifiez si l'élément existe avant de le supprimer
+            if (elementASupprimer) {
+                // Utilisez parentNode.removeChild() pour supprimer l'élément
+                tchatElement.removeChild(elementASupprimer);
+            }
+            tchatElement.insertAdjacentHTML('beforeend', "<div class='message error-sending'>" + encodeURIComponent(messageContent) + " </div>");
             scrollToBottom();
         }
     });
@@ -35,6 +49,7 @@ function RefreshConversation() {
             method: 'POST',
             data: { 'ch': params.get('ch') },
             success: function(response) {
+                console.log(response)
                 PostRefreshConversation(response);
             },
             error: function(xhr, status, error) {
@@ -91,8 +106,8 @@ function SendWallpaperModification(color) {
 function QuitConversation() {
     // Effectuez la requête Ajax
     $.ajax({
-        url: '../process/conversation/quit_conversation.php',
-        method: 'POST',
-        data: { 'ch' : params.get('ch') }
+      url: '../process/conversation/quit_conversation.php',
+      method: 'POST',
+      data: { 'ch' : params.get('ch') }
     });
-}
+  }

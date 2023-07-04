@@ -78,7 +78,7 @@ h3 {
 }
 
 .delete {
-  background-image: url('./image/icon/trash.png');
+  background-image: url('./image/icon/trash.svg');
   background-color: rgb(157, 57, 57);
   border: none;
   outline: none;
@@ -91,7 +91,8 @@ h3 {
 }
 
 .search_friend_button {
-  background-image: url('./image/icon/friend_search.png');
+  background-image: url('./image/icon/friend_search.svg');
+  background-size: 40%;
   border: none;
   outline: none;
   box-shadow: none;
@@ -128,12 +129,12 @@ h3 {
   text-decoration: none;
   color: white;
   background-color: rgba(41, 41, 41, 0.5);
-  height: 100%;
-  width: 100%;
+  transition: all 0.35s ease;
 }
 
 .friend_a:hover {
-  text-decoration: underline;
+  background-color: rgba(255, 255, 255, 0.6);
+  color: black;
 }
 
 .friend span {
@@ -155,7 +156,8 @@ h3 {
   font-size: 20px;
   padding: 15px;
   margin: 15px;
-  margin-bottom: 0px;
+  margin-bottom: 5px;
+  margin-top: 5px;
   color: white;
   word-wrap: break-word;
 }
@@ -163,6 +165,18 @@ h3 {
 .tchat-delimiter {
   background-color: rgba(54, 54, 54, 0.5);
   border-radius: 20px 20px 20px 20px;
+}
+
+.sending {
+  background-image: linear-gradient(to right, rgba(8, 8, 8, 0.5), rgba(88, 88, 88, 0.5));
+  background-size: 200% 100%;
+  animation: wave 0.8s ease infinite;
+}
+
+.error-sending {
+  border-radius: 20px 20px 1px 20px;
+  text-align: right;
+  background-color: rgba(65, 5, 5, 0.5);
 }
 
 /* Style des messages de l'utilisateur */
@@ -207,4 +221,23 @@ h3 {
   vertical-align: middle;
   width: 20px;
   height: 20px;
+}
+
+@keyframes wave {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.top_bar,
+.tchat,
+.message_form,
+.div_friend_list {
+  transition: background-color 0.7s ease; /* Durée de la transition et fonction de minutage */
 }

@@ -1,0 +1,20 @@
+:root {
+  --color-body: #824d4d;
+  --color-nav: #1B3334;
+  --color-text: white;
+}
+
+html,
+body {
+  min-height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-body);
+  text-align: center;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}

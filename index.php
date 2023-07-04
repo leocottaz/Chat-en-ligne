@@ -9,6 +9,7 @@
   <title>Shadwow's Chat</title>
   <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="/style/index.css">
+  <link rel="stylesheet" media="(max-width: 767px)" href="/style/phone/index.css">
 </head>
 
 <body>

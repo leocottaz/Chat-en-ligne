@@ -1,28 +1,37 @@
-        ---- 12 Juin 2023 ----
-            --- V0.4.1 ---
----- Adjust & Optimization Update ----
+     
+---- 4 Juillet 2023 ----
+     --- V0.5 ---
+ -- Friends Update --
 
-Ajouts :
-    - Ajout de message d'avertissement quand un utilisateur fais une action
-        ↳ Ajout d'un système côté serveur pour ajouter la possibilité d'avoir des messages 
-        insupprimables
+Ajout :
+    Système :
+        - Ajout d'un style compatible avec les téléphones (en cours de développement)
+        - Système d'ajout d'amis.
+    
+    Esthétique :
+        - Ajout d'une animation lorsqu'un message est en cours d'envoi.
+        - Une transition aura désormais lieu lors du changement de couleur du tchat
 
 
-Modifications :                   [] = changement pour l'utilisateur
-    - Déplacement du fichier generate_html.php pour faciliter la comprehension de la structure du
-    site 
-    [Aucun]
-    - Une grosse partie de tout les scripts à été optimisée afin d'être executée plus
-    rapidement
-    - Prise en charge d'erreurs potentielles
+Modifications :
+    Interface :
+        - Modification du titre de certaine page qui n'était pas correct
+        - Les icônes pour aller sur la page des amis/discussions ont été agrandis
+        - Les messages sont désormais plus serré entre eux (plus compact)
+        - Certaine icones ont été remplacé par leurs équivalents SVG
+    
+    Sécurité :
+        - il est désormais impossible de créer un compte ayant + de 32 charactères dans son pseudo
+        - Tout les ids/tokens seront désormais stockés en majuscule pour une meilleure lisibilité
 
 
 Suppression :  
     /////////////////////
 
 
-Bugs résolus :
-    - Le tchat reviens en bas toute les secondes même si aucun nouveau message n'est reçu
-    - Possibilité d'envoyer plusieurs fois le même message pendant que le précedent s'envoie
-    - Affichage de ses propres messages même si il est supprimé
-    - Si l'utilisateur change de couleur du tchat, l'autre ne reçoit plus aucun message après
+Problèmes résolus :                   [] = comment reproduire le problème
+    Sécurité :
+        - N'importe quel utilisateur pouvais supprimer un message sur n'importe quelle discussion
+          même celle qui ne lui appartenait pas.
+        [Envoyer une requête post à delete_message.php avec comme paramètre l'id du message et l'id
+        du channel]
