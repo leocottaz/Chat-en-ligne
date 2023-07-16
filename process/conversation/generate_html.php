@@ -14,7 +14,9 @@ function friend_list($json_file) {
     $found = False;
 
     if (empty($user["friends"])) {
-        echo "<li>Aucun ami trouvé</li>";
+        echo "<li class='friend'>
+        <a class='friend_a' href='friend.php'>Aucun ami trouvé<br>Ajoutez en un !</a>
+       </li>";
     } else {
         foreach ($user["friends"] as $friendName => $friendInfo) {
         
@@ -56,19 +58,25 @@ function tchat($json_file) {
             }
         }
 
-        $conversation_file_path = '../data/conversation/' . $_GET["ch"] . ".json";
+        $conversation_file_path = '../data/conversation/' . $_GET["ch"] . "/messages.json";
         if ($exist == True and file_exists($conversation_file_path)) {
             
             $conversation_file = file_get_contents($conversation_file_path);
             $conversation = json_decode($conversation_file, true);
             
         } else {
-                echo "Impossible d'acceder à la discussion";
+                echo "<div class='warn-tchat error-tchat'>
+                        <img src='../style/image/interrogation-error.svg'>
+                        <h3>Impossible d'accéder à la discussion</h3>
+                     </div>";
+
                 echo '<style> .top_bar { display: none; } </style>';
                 echo '<style> .message_form_container { display: none; } </style>';
                 exit;
         }
         
+        echo "<div class='tchat'>";
+
         foreach ($conversation["messages"] as $message) {
             $author = $message["author"];
             $status = $message["status"];
@@ -82,21 +90,21 @@ function tchat($json_file) {
                     if ($author == $_SESSION["username"]) { 
                         if($system) {
                             echo "
-                            <div class='message user-message'>$content</div>
+                            <div class='message user-message'><p>$content</p></div>
                             ";  
                         } else {
                             echo "
-                            <div class='message user-message' messageId='$id'><button class='delete_button' onclick='DeleteMessage($id)'>Delete</button>" . htmlspecialchars($content) . "</div>
+                            <div class='message user-message' messageId='$id'><button class='delete_button' onclick='DeleteMessage($id)'>Delete</button><p>" . htmlspecialchars($content) . "</p></div>
                             ";
                         }
                     } else {
                         if($system) {
                             echo "
-                            <div class='message other-message'>$content</div>
+                            <div class='message other-message'><p>$content</p></div>
                             ";  
                         } else {
                             echo "
-                            <div class='message other-message' messageId='$id'>" . htmlspecialchars($content) . "</div>
+                            <div class='message other-message' messageId='$id'><p>" . htmlspecialchars($content) . "</p></div>
                             ";
                         }
                     }
@@ -106,19 +114,26 @@ function tchat($json_file) {
                 if ($author == $_SESSION["username"]) {
                     if($system) {
                         echo "
-                        <div class='message user-message'>$content</div>
+                        <div class='message user-message'><p>$content</p></div>
                         ";  
                     } else {
                         echo "
-                        <div class='message user-message' messageId='$id'><button class='delete_button' onclick='DeleteMessage($id)'>Delete</button>" . htmlspecialchars($content) . "</div>
+                        <div class='message user-message' messageId='$id'><button class='delete_button' onclick='DeleteMessage($id)'>Delete</button><p>" . htmlspecialchars($content) . "</p></div>
                         ";
                     }
                 }
             }
             }
         }
+
+        echo "</div>";
+        
     } else { //Aucun tchat ouvert par l'utilisateur
-        echo "Aucun tchat d'ouvert";
+        echo "<div class='warn-tchat no-tchat'>
+                <img src='../style/image/arrow-error.svg'>
+                <h3>Vous n'avez aucun tchat d'ouvert... <br>Ouvrez en un dans la liste à gauche :)</h3>
+             </div>";
+
         echo '<style> .message_form_container { display: none; } </style>';
         echo '<style> .top_bar { display: none; } </style>';
     }
@@ -130,7 +145,7 @@ function top_bar($json_file) {
             $json = getAllUsers($json_file);
             $user = getUser($_SESSION["username"], $json_file);
             $Channel = $_GET["ch"];
-            $ChannelFile = '../data/conversation/' . $Channel . ".json";
+            $ChannelFile = '../data/conversation/' . $Channel . "/messages.json";
             $decode = file_get_contents($ChannelFile);
             $json = json_decode($decode, true);
 
@@ -143,7 +158,7 @@ function top_bar($json_file) {
                 }
             }
         } catch (Exception $e) {
-            // Gérer l'exception
+            echo "<style> .top_bar { display: none; } </style>";
         }
     }
 }

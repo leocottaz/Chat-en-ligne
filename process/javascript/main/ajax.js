@@ -3,8 +3,21 @@ const params = new URLSearchParams(window.location.search);
 function SendMessage() {
     const input = document.querySelector('.message_input');
     const messageContent = input.value;
+
+    if (messageContent.length === 0) {
+        return false;
+    };
+
+
     const tchatElement = document.querySelector('.tchat');
-    tchatElement.insertAdjacentHTML('beforeend', "<div class='message sending user-message'>" + encodeURIComponent(messageContent) + " </div>");
+    tchatElement.insertAdjacentHTML('beforeend', "<div class='message sending user-message'>" + messageContent + `   <img class='sending_pic' src="" title="Envoi du message en cours"></div>`);
+    var elementsImages = document.querySelectorAll('.sending_pic');
+
+    // Parcourir tous les éléments et appliquer les modifications
+    elementsImages.forEach(function(elementImage) {
+        // Modifier la source de l'image
+        elementImage.src = MessageSendingSVG.src;
+    });
     scrollToBottom();
     input.value = "";
 
@@ -27,7 +40,6 @@ function SendMessage() {
         },
         error: function(xhr, status, error) {
             console.log(error);
-            input.value = messageContent;
             // Traitement de la réponse réussie ici
             const elementASupprimer = tchatElement.querySelector('.message.sending.user-message');
             // Vérifiez si l'élément existe avant de le supprimer
@@ -35,13 +47,35 @@ function SendMessage() {
                 // Utilisez parentNode.removeChild() pour supprimer l'élément
                 tchatElement.removeChild(elementASupprimer);
             }
-            tchatElement.insertAdjacentHTML('beforeend', "<div class='message error-sending'>" + encodeURIComponent(messageContent) + " </div>");
+            if (xhr.status === 400) {
+                return false;
+            };
+            tchatElement.insertAdjacentHTML('beforeend', `<div class='message user-message'>`
+            + encodeURI(messageContent) +
+            ` <img class='error_sending_pic' src="" title="Une erreur est survenue lors de l'envoi du message" alt="Une erreur est survenue lors de l'envoi du message">
+            </div>`);
+            var elementsImages = document.querySelectorAll('.error_sending_pic');
+
+            // Parcourir tous les éléments et appliquer les modifications
+            elementsImages.forEach(function(elementImage) {
+                // Modifier la source de l'image
+                elementImage.src = MessageErrorSVG.src;
+            });
             scrollToBottom();
         }
     });
 }
 
 function RefreshConversation() {
+    const connexion_error_pic = document.querySelector('.connexion_error_pic');
+    const server_error_pic = document.querySelector('.server_error_pic');
+    if (navigator.onLine) {
+        connexion_error_pic.style.display = "none";
+    } else {
+        server_error_pic.style.display = "none";
+        connexion_error_pic.style.display = "block";
+        return false;
+    }
     if (params.has('ch') && document.visibilityState === "visible") {
         // Effectuez la requête Ajax
         $.ajax({
@@ -49,10 +83,12 @@ function RefreshConversation() {
             method: 'POST',
             data: { 'ch': params.get('ch') },
             success: function(response) {
-                console.log(response)
+                server_error_pic.style.display = "none";
                 PostRefreshConversation(response);
             },
             error: function(xhr, status, error) {
+                server_error_pic.style.display = "block";
+                connexion_error_pic.style.display = "none";
                 console.log(error);
             }
         });

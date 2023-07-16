@@ -47,10 +47,18 @@ try {
             'messages' => array()
         );
 
-        $jsonData = json_encode($data);
+        $jsonData = json_encode($data, JSON_PRETTY_PRINT);
+        $foldername = $json[$user]["friends"][$target]["channel_id"];
+        $folder =  "../../data/conversation/" . $foldername;
+        $imgfolder = $folder . "/image";
+        
 
-        $filename =  $json[$user]["friends"][$target]["channel_id"] . ".json";
-        $file = fopen("../../data/conversation/" . $filename, 'w');
+        if (!is_dir($folder)) {
+            mkdir($folder, 0777, true);
+            mkdir($imgfolder, 0777, true);
+        }
+
+        $file = fopen($folder . "/messages.json", 'w');
 
         if ($file) {
             fwrite($file, $jsonData);
@@ -59,19 +67,6 @@ try {
             http_response_code(500);
             exit;
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
     } else {
         http_response_code(500);
         exit;
@@ -86,5 +81,4 @@ try {
     http_response_code(500);
     exit;
 }
-
 ?>

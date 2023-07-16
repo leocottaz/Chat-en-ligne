@@ -1,9 +1,28 @@
 var DeleteButtonDisplay = false;
 
+var MessageErrorSVG = new Image();
+MessageErrorSVG.src = '../../../style/image/icon/message-error.svg';
+
+var MessageSendingSVG = new Image();
+MessageSendingSVG.src = '../../../style/image/icon/message-sending.svg';
+
+var NoConnexionSVG = new Image();
+NoConnexionSVG.src = '../../../style/image/icon/connexion-error.svg';
+
+var ServerErrorSVG = new Image();
+ServerErrorSVG.src = '../../../style/image/icon/server-error.svg';
+
 // Fonction pour descendre dans le tchat le plus bas possible
 function scrollToBottom() {
   document.querySelector('.tchat').scrollTo({
     top: document.querySelector('.tchat').scrollHeight,
+    behavior: 'smooth'
+  });
+}
+
+function scrollTextArea() {
+  document.querySelector('.message_input').scrollTo({
+    top: document.querySelector('.message_input').scrollHeight,
     behavior: 'smooth'
   });
 }
@@ -38,13 +57,37 @@ window.addEventListener('DOMContentLoaded', function() {
   input.focus();
   scrollToBottom();
 
+  const connexion_error_pic = document.querySelector('.connexion_error_pic');
+  connexion_error_pic.src = NoConnexionSVG.src;
+
+  const server_error_pic = document.querySelector('.server_error_pic');
+  server_error_pic.src = ServerErrorSVG.src;
+
   input.addEventListener("keydown", function(event) {
-    if (event.key === "Enter") {
+    $(".message_form_container").height("auto");
+    $(".message_form_container").height(input.scrollHeight + 30);
+    if (event.shiftKey && event.keyCode === 13) {
+      // SHIFT + ENTREE : sauter une ligne
+      event.preventDefault();
+      insertLineBreak();
+    } else if (event.keyCode === 13) {
+      // ENTREE : exécuter une fonction
       event.preventDefault();
       ContentInput();
     }
   });
+
+  function insertLineBreak() {
+    var startPos = input.selectionStart;
+    var endPos = input.selectionEnd;
+    var value = input.value;
+    input.value = value.substring(0, startPos) + "\n" + value.substring(endPos);
+    // Remettre le curseur à sa position d'origine
+    input.selectionStart = startPos + 1;
+    input.selectionEnd = startPos + 1;
+  }
 });
+
 
 // SI l'UTILISATEUR FERME SON NAVIGATEUR OU L'ONGLET ON LE DECONNECTE DE LA CONVERSATION
 window.addEventListener("beforeunload", function(event) {

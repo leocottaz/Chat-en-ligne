@@ -11,12 +11,15 @@ try {
     $MessageAuthor = $_SESSION["username"];
     $MessageContent = $_POST["content"];
     $Channel = $_POST["ch"];
-    $ChannelFile = '../../data/conversation/' . $Channel . ".json";
+    $ChannelFile = '../../data/conversation/' . $Channel . "/messages.json";
 
     $json = json_decode(file_get_contents($ChannelFile), true);
     $MessageId = count($json["messages"]) + 1;
 
+    $MessageContent = rtrim($MessageContent, " \t\n\r\0\x0B");
+
     if (empty($MessageContent)) {
+        http_response_code(400);
         exit;
     }
 
@@ -36,7 +39,7 @@ try {
 
     echo "<div class='message user-message' messageId='$MessageId'>
             <button class='delete_button' onclick='DeleteMessage($MessageId)'>Delete</button>
-            " . htmlspecialchars($MessageContent) . "
+            <p>" . htmlspecialchars($MessageContent) . "</p>
         </div>";
 
 } catch (Exception $e) {

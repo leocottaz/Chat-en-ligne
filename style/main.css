@@ -50,20 +50,48 @@ body {
 
 h3 {
   position: relative;
+  width: min-content;
   left: 60px;
   top: -5px;
 }
 
+.connexion_error_pic {
+  position: absolute;
+  top: 15px;
+  width: 20px;
+  height: 20px;
+  right: 18px;
+}
+
+.server_error_pic {
+  position: absolute;
+  top: 15px;
+  width: 20px;
+  height: 20px;
+  right: 18px;
+}
+
 .message_form {
   width: 100%;
-  height: 60px;
+  height: 100%;
   flex: 2;
   display: flex;
   flex-direction: row;
 }
 
+.message_form_container {
+  min-height: 60px;
+  max-height: 40%;
+}
+
 .message_input {
+  caret-color: #C3C3C3;
+  color: white;
+  background-color: transparent;
+  border: 1px solid #9b9b9b;
   width: 80%;
+  height: calc(100% - 40px);
+  resize: vertical; /* Permettre uniquement le redimensionnement vertical */
   padding: 10px;
   margin: 10px;
   margin-left: 20px;
@@ -71,6 +99,9 @@ h3 {
 }
 
 .submit {
+  color: white;
+  background-color: transparent;
+  border: 1px solid #9b9b9b;
   padding: 10px;
   margin: 10px;
   margin-left: 5px;
@@ -79,8 +110,8 @@ h3 {
 
 .delete {
   background-image: url('./image/icon/trash.svg');
-  background-color: rgb(157, 57, 57);
-  border: none;
+  background-color: transparent;
+  border: 2px solid #dc3545;
   outline: none;
   box-shadow: none;
   padding-inline: 30px;
@@ -160,6 +191,50 @@ h3 {
   margin-top: 5px;
   color: white;
   word-wrap: break-word;
+  align-items: center;
+}
+
+.message p {
+    white-space: pre-wrap;
+    margin: 0;
+}
+
+.sending_pic {
+  user-select: none;
+}
+
+.error_sending_pic {
+  user-select: none;
+}
+
+
+.warn-tchat {
+  user-select: none;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+
+.warn-tchat img {
+  margin-top: 30vh;
+  height: 20%;
+}
+
+.warn-tchat h3 {
+  margin-top: 5vh;
+  position: relative;
+  width: 100%;
+  font-size: 2vw;
+  left: 0px;
+  top: 0px;
+}
+
+.no-tchat h3 {
+  color: #b2b2b2;
+}
+
+.error-tchat h3 {
+  color: #dc3545;
 }
 
 .tchat-delimiter {
@@ -204,12 +279,12 @@ h3 {
   position: absolute;
   display: none;
   top: 9px;
-  border: none;
+  background-color: transparent;
+  border: 2px solid #dc3545;
   outline: none;
   box-shadow: none;
-  background-color: rgb(157, 57, 57);
   padding: 10px;
-  color: white;
+  color: #dc3545;
   border-radius: 10px;
 }
 

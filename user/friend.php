@@ -39,12 +39,19 @@ if (!$connected[0]) {
     </ul>
   </div>
 
+  
+
   <div class="friend_form_container">
+
     <div class="friend_form">
       <!-- Champ pour le message -->
-      <input type="text" class="friend_search_input" placeholder="Qui cherchez vous ?">
+      <input maxlength="32" type="text" class="friend_search_input" placeholder="Qui cherchez vous ?">
        <!-- Bouton pour envoyer le message -->
       <button class="submit" onclick="SearchFriend()">Rechercher</button>
+    </div>
+
+    <div class="display-warn">
+      <h3 class="error-text"><h3>
     </div>
 
     <div class="friend_center_div">

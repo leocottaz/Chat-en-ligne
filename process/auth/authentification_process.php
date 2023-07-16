@@ -18,7 +18,7 @@ function getAllUsers($json_file = '../../data/users.json') {
  * Encryptage (sans décryptage possible du mot de passe)
  */
 function encrypt($text) {
-    return sha1($text);
+    return password_hash($text, PASSWORD_BCRYPT);;
 }
 
 /**
@@ -74,7 +74,7 @@ function addUser($username, $password, $remember) {
         'right' => False,
         'private_id' => $user_ids[2],
         'public_id' => $user_ids[1],
-        'token'    => $user_ids[0],
+        'token'    => encrypt($user_ids[0]),
         'friends' => []
     ];
     // Sauvegarde de la liste des utilisateurs
@@ -106,9 +106,11 @@ function register($username, $password, $remember) {
     }
 
     // Si le pseudo de l'utilisateur fais moins de 32 charactères
-    if(strlen($username) <= 32) {
+    if(strlen($username) <= 32 and strlen($password) <= 32) {
         // Enregistrement du nouvel utilisateur
         addUser($username, $password, $remember);
+    } else {
+        die("Le pseudo et le mot de passe ne peuvent pas dépasser 32 charactères.");
     }
 }
 
@@ -133,8 +135,7 @@ function login($username, $password, $remember) {
         die( "L'utilisateur {$username} n'est pas enregistré." );
     }
 
-    // Si le mot de passe (hashé) ne correspond pas, on arrête tout.
-    if( $json[$username]['password'] !== encrypt($password) ) {
+    if (!password_verify($password, $json[$username]['password'])) {
         die( "L'utilisateur {$username} n'est pas enregistré." );
     }
 
@@ -142,7 +143,7 @@ function login($username, $password, $remember) {
     $token = generateToken()[0];
 
     // Enregistrement du nouveau token et sauvegarde des utilisateurs
-    $json[$username]['token'] = $token;
+    $json[$username]['token'] = encrypt($token);
     updateJson($json);
 
     // Enregistrement des données dans la session de l'utilisateur

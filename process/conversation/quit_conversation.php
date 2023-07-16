@@ -19,7 +19,7 @@ try {
         exit;
     }
 
-    $ChannelFile = '../../data/conversation/' . $Channel . ".json";
+    $ChannelFile = '../../data/conversation/' . $Channel . "/messages.json";
     if (!file_exists($ChannelFile)) {
         http_response_code(500);
         exit;
@@ -39,5 +39,4 @@ try {
     http_response_code(500);
     exit;
 }
-
 ?>

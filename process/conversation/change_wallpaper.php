@@ -12,7 +12,7 @@ try {
     $Color = $_POST["color"];
     date_default_timezone_set('UTC');
     $MessageDate = date('Y-m-d\TH:i');
-    $ChannelFile = '../../data/conversation/' . $Channel . ".json";
+    $ChannelFile = '../../data/conversation/' . $Channel . "/messages.json";
 
     if (!file_exists($ChannelFile)) {
         throw new Exception('Conversation file does not exist');

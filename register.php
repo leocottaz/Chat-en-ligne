@@ -28,11 +28,11 @@
         }
         ?>
             <!-- Les éléments de formulaire suivants sont définis pour saisir le nom d'utilisateur, le mot de passe et pour soumettre le formulaire -->
-            <input type="text" id="ident" name="username" placeholder="Nom d'utilisateur"><br>
-            <input type="password" id="motpasse" name="password" placeholder="Mot de passe"><br><br>
+            <input maxlength="32" type="text" id="ident" name="username" placeholder="Nom d'utilisateur"><br>
+            <input maxlength="32" type="password" id="motpasse" name="password" placeholder="Mot de passe"><br><br>
             <label>
-                <input type="hidden" name="remember" value="0" />
-                <input type="checkbox" name="remember" value="1" />
+                <input type="hidden" name="remember" value="0"/>
+                <input type="checkbox" name="remember" value="1"/>
                     Se souvenir de moi
             </label>
             <input type="submit" id="submit" value="Creer un compte">

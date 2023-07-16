@@ -1,9 +1,6 @@
 <?php
 session_start();
 
-define("STATUS_DISCONNECTED", "DISCONNECTED");
-define("STATUS_CONNECTED", "CONNECTED");
-
 function errorHandler($severity, $message, $file, $line) {
     throw new ErrorException($message, 0, $severity, $file, $line);
 }
@@ -13,7 +10,7 @@ set_error_handler('errorHandler');
 try {
     if (!empty($_POST["ch"])) {
         $Channel = $_POST["ch"];
-        $ChannelFile = '../../data/conversation/' . $Channel . ".json";
+        $ChannelFile = '../../data/conversation/' . $Channel . "/messages.json";
 
         if (file_exists($ChannelFile)) {
             $decode = file_get_contents($ChannelFile);
@@ -57,9 +54,9 @@ try {
                             echo "<!!delimiter!!>";
 
                             if ($message["system"]) {
-                                echo "<div class='message other-message' messageId='$Id'>" . $message["content"] . "</div>\n";
+                                echo "<div class='message other-message' messageId='$Id'><p>" . $message["content"] . "</p></div>\n";
                             } else {
-                                echo "<div class='message other-message' messageId='$Id'>" . htmlspecialchars($message["content"]) . "</div>\n";
+                                echo "<div class='message other-message' messageId='$Id'><p>" . htmlspecialchars($message["content"]) . "</p></div>\n";
                             }
                         }
                     }
@@ -79,5 +76,4 @@ try {
     http_response_code(500);
     exit;
 }
-
 ?>

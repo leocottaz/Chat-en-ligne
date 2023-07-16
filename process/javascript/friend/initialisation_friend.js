@@ -5,7 +5,7 @@ window.addEventListener('DOMContentLoaded', function() {
     input.focus()
     
     // Associer l'appui sur la touche "Entrée" au bouton "Envoyer"
-    input.addEventListener("keyup", function(event) {
+    input.addEventListener("keydown", function(event) {
         if (event.keyCode === 13) {
             event.preventDefault();
             SearchFriend();
@@ -21,8 +21,31 @@ function PostSearchFriend(response, target){
     </div>`;
 
     if (response === "R OK") {
-        $('.friend_await_response_div').append(element);
-    };
+      $('.friend_await_response_div').append(element);
+      $('.friend_search_input').css('color', '#3baf49');
+      $('.friend_search_input').css('border-color', '#3baf49');
+      $('.error-text').css("color", "#3baf49");
+      $('.error-text').html("La demande à été envoyé dans les cieux jusqu'à votre futur ami !");
+    
+      setTimeout(function() {
+        $('.friend_search_input').css("color", "#ffffff");
+        $('.friend_search_input').css('border-color', '#9b9b9b');
+      }, 300);
+
+    } else {
+      $('.error-text').css("color", "#dc3545")
+      $('.error-text').html(response);
+
+      $('.friend_search_input').addClass("shake-animation");
+      $('.friend_search_input').css('color', '#dc3545');
+      $('.friend_search_input').css('border-color', '#dc3545');
+
+      setTimeout(function() {
+        $('.friend_search_input').removeClass("shake-animation");
+        $('.friend_search_input').css('color', '#ffffff');
+        $('.friend_search_input').css('border-color', '#9b9b9b');
+      }, 300);
+    }
 }
 
 function PostRefreshRequest(response) {

@@ -1,37 +1,40 @@
-     
----- 4 Juillet 2023 ----
-     --- V0.5 ---
- -- Friends Update --
+---- 16 Juillet 2023 ----
+     --- V0.6 ---
+  -- Display Update --
 
-Ajout :
-    Système :
-        - Ajout d'un style compatible avec les téléphones (en cours de développement)
-        - Système d'ajout d'amis.
-    
-    Esthétique :
-        - Ajout d'une animation lorsqu'un message est en cours d'envoi.
-        - Une transition aura désormais lieu lors du changement de couleur du tchat
+Ajouts :
+    Tchat :
+        - Ajout de la possibilité de sauter des lignes dans son message.
+        - Préparation d'un futur support des images dans les tchats
+
+    Gestion des évenements/erreurs :
+        - Une flèche vers le haut s'affiche lorsqu'un message est en cours d'envoi.
+        - Un point d'exclamation apparaît dès qu'un message n'a pas été envoyé.
+        - Un voyant en haut à droite s'affiche dès que l'utilisateur est hors ligne ou qu'une
+          erreur survient sur le serveur. (un voyant différent pour les deux)
+        - Affichage d'un message d'erreur lorsqu'un tchat n'arrive pas à être ouvert.
+        - Affichage d'un message lorsqu'un tchat n'est pas ouvert.
+        - Désormais le champs d'écriture de demande d'ami clignote en rouge en cas d'erreur 
+          (avec un message) et en vert si la demande à été faite avec succès !
 
 
 Modifications :
-    Interface :
-        - Modification du titre de certaine page qui n'était pas correct
-        - Les icônes pour aller sur la page des amis/discussions ont été agrandis
-        - Les messages sont désormais plus serré entre eux (plus compact)
-        - Certaine icones ont été remplacé par leurs équivalents SVG
-    
-    Sécurité :
-        - il est désormais impossible de créer un compte ayant + de 32 charactères dans son pseudo
-        - Tout les ids/tokens seront désormais stockés en majuscule pour une meilleure lisibilité
+    Sécurité : 
+        - SHA-1 étant obsolète, utilisation de BCrypt pour crypter les mots de passe et tokens
+        - Les tokens sont désormais cryptés dans la base de données.
+        - Il est désormais impossible de créer un compte avec plus de 32 charactère dans le mot de passe.
 
+    Stockage :
+        - Lors de la création du fichier contenant une nouvelle discussion, le json sera au format 
+        JSON_PRETTY_PRINT.
 
-Suppression :  
-    /////////////////////
+    Message :
+        - En cas d'erreur d'envoi de message, le champs d'écriture ne reprendra pas comme valeur 
+        l'ancien message.
+        - Il est désormais impossible d'envoyer des messages vides (à base de sauts de ligne
+          et d'espace)
 
-
-Problèmes résolus :                   [] = comment reproduire le problème
-    Sécurité :
-        - N'importe quel utilisateur pouvais supprimer un message sur n'importe quelle discussion
-          même celle qui ne lui appartenait pas.
-        [Envoyer une requête post à delete_message.php avec comme paramètre l'id du message et l'id
-        du channel]
+    Esthétique : 
+        - Changement de la couleur et ajout d'une bordure pour les éléments suivant :
+            - Champs d'écriture de messages et de demandes d'amis,
+            - Boutons pour supprimer des messages.

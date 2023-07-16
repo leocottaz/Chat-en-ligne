@@ -10,7 +10,7 @@ set_error_handler('errorHandler');
 try {
     $MessageId = $_POST["id"];
     $Channel = $_POST["ch"];
-    $ChannelFile = '../../data/conversation/' . $Channel . ".json";
+    $ChannelFile = '../../data/conversation/' . $Channel . "/messages.json";
 
     if (!file_exists($ChannelFile)) {
         throw new Exception('Conversation file does not exist');
@@ -37,5 +37,4 @@ try {
     http_response_code(500);
     exit;
 }
-
 ?>

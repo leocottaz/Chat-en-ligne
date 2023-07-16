@@ -41,6 +41,7 @@ body {
 }
 
 .button {
+  user-select: none;
   border: none; /* Ajout de cette ligne pour supprimer la bordure par défaut */
   box-shadow: none; /* Ajout de cette ligne pour supprimer l'effet de relief */
   width: 30px;
@@ -63,6 +64,7 @@ body {
 }
 
 .friend_await_response {
+  user-select: none;
   border-radius: 10px 10px 10px 10px;
   background-color: rgba(77, 77, 77, 0.5);
   padding-inline: 10px;
@@ -99,6 +101,7 @@ body {
 }
 
 .title {
+  user-select: none;
   color: white;
 }
 
@@ -121,14 +124,26 @@ body {
 }
 
 .friend_search_input {
+  caret-color: #C3C3C3;
+  color: white;
+  background-color: transparent;
+  border: 1px solid #9b9b9b;
   width: 80%;
   padding: 10px;
   margin: 10px;
   margin-left: 20px;
   border-radius: 10px;
+  transition: 0.1s ease all;
+}
+
+.friend_search_input:focus {
+  outline: none; /* Supprimer la bordure de focus */
 }
 
 .submit {
+  color: white;
+  background-color: transparent;
+  border: 1px solid #9b9b9b;
   padding: 10px;
   margin: 10px;
   margin-left: 5px;
@@ -185,4 +200,29 @@ body {
   border-radius: 10px;
   background-repeat: no-repeat;
   background-position: center center;
+}
+
+.display-warn {
+  text-align: left;
+  height: 40px;
+  width: 100%;
+}
+
+.error-text {
+  margin-top: 0;
+  margin-left: 20px;
+  color: #dc3545;
+}
+
+.shake-animation {
+  animation: shake 0.3s;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-2px); }
+  40% { transform: translateX(2px); }
+  60% { transform: translateX(-2px); }
+  80% { transform: translateX(2px); }
+  100% { transform: translateX(0); }
 }

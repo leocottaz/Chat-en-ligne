@@ -13,7 +13,7 @@ function SearchFriend() {
             PostSearchFriend(response, InputContent)
         },
         error: function(xhr, status, error) {
-            input.style.backgroundColor = 'red';
+            
         }
     });
 }

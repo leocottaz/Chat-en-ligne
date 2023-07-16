@@ -15,6 +15,12 @@ function random_code() {
 
  try {
     $target = $_POST["target"];
+
+    if(empty($target)) {
+        echo "...... Qui voulez vous demander ?";
+        exit;
+    }
+    
     $author = $_SESSION["username"];
     $FilePath = "../../data/users.json";
     $decode = file_get_contents($FilePath);
@@ -23,13 +29,12 @@ function random_code() {
     $file = "../../conversation/" . $channel_id . ".json";
 
     while (file_exists($file)) {
-        echo $channel_id . ".json existe déjà";
         $channel_id = random_code();
-        $file = "../../conversation/" . $channel_id . ".json";
+        $file = "../../conversation/" . $channel_id . "/messages.json";
     }
 
     if($author == $target) {
-        http_response_code(500);
+        echo "Vous ?? Impossible de se demander soi même en ami !";
         exit;
     }
 
@@ -57,21 +62,14 @@ function random_code() {
                 echo "R OK";
             }
         } else {
-            echo "T False";
+            echo "\"$target\" n'existe pas ! Vous vous êtes sûrement trompé..";
+            exit;
         }
+    } else {
+        echo "Quel est cette sorcellerie ? Vous n'existez pas ??";
     }
 
  } catch (Exception $e) {
-    echo "<div class='error-message'> Une erreur est survenue lors de la recherche de l'utilisateur </div>";
+    echo "Mince. Un problème est survenu. Ressayez plus tard !";
 }
-
-
-
-
-
-
-
-
-
-
 ?>

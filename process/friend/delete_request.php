@@ -23,7 +23,6 @@ try {
         }
     }
     
-
     $newJson = json_encode($json, JSON_PRETTY_PRINT);
 
     // Écrire le contenu JSON modifié dans le fichier
@@ -33,5 +32,4 @@ try {
     http_response_code(500);
     exit;
 }
-
 ?>

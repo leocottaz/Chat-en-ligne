@@ -24,9 +24,9 @@
         <!-- Formulaire de connexion qui envoie les données au script de redirection (redirect.php) -->
         <form action="/process/auth/redirect.php?a=login" method="POST">
             <!-- Champ pour le nom d'utilisateur -->
-            <input type="text" id="ident" name="username" placeholder="Nom d'utilisateur"><br>
+            <input maxlength="32" type="text" id="ident" name="username" placeholder="Nom d'utilisateur"><br>
             <!-- Champ pour le mot de passe -->
-            <input type="password" id="motpasse" name="password" placeholder="Mot de passe"><br><br>
+            <input maxlength="32" type="password" id="motpasse" name="password" placeholder="Mot de passe"><br><br>
             <label>
                 <input type="hidden" name="remember" value="0" />
                 <input type="checkbox" name="remember" value="1" />

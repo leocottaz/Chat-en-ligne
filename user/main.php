@@ -43,13 +43,13 @@ if (!$connected[0]) {
       <?php
       top_bar("../data/users.json");  
       ?>
+      <img class="connexion_error_pic" src="" title="Vous n'êtes plus connecté à internet" style="display: none;">
+      <img class="server_error_pic" src="" title="Une erreur est survenue sur le serveur" style="display: none;">
     </div>
 
-  <div class="tchat">
   <?php
     tchat("../data/users.json");  
   ?>
-  </div>
 
   <div class="message_form_container">
     <div class="message_form">
