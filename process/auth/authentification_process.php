@@ -1,5 +1,40 @@
 <?php 
 
+function checkBruteForce($username) {
+    $file = '../../data/connexion.json';
+    $json = json_decode(file_get_contents($file), true);
+
+    $AdresseIP = $_SERVER['REMOTE_ADDR'];
+    $Time = time();
+
+    if (!isset($json[$AdresseIP][$username])) {
+        $json[$AdresseIP][$username] = [
+            'count' => 1,
+            'last_attempt' => $Time
+        ];
+    } else {
+        $last_attempt = $json[$AdresseIP][$username]['last_attempt'];
+        if ($Time - $last_attempt < 900) { // 900 secondes = 15 minutes
+            $json[$AdresseIP][$username]['count']++;
+        } else {
+            // Réinitialisation des tentatives après 15 minutes
+            $json[$AdresseIP][$username]['count'] = 1;
+            $json[$AdresseIP][$username]['last_attempt'] = $Time;
+        }
+    }
+
+    // Sauvegarde des tentatives de connexion
+    file_put_contents($file, json_encode($json, JSON_PRETTY_PRINT));
+
+    // Vérifier si les tentatives dépassent le seuil
+    if ($json[$AdresseIP][$username]['count'] > 5) {
+        // You can also log or notify about the blocked attempt here
+        return true; // Bloqué
+    }
+
+    return false; // Pas bloqué
+}
+
 /**
  * Renvoie tous les utilisateurs enregistrés
  */
@@ -25,8 +60,8 @@ function encrypt($text) {
  * Génère un token de 256 bits
  */
 function generateToken() {
-    $token = random_bytes(32);
-    $token = bin2hex($token);
+    $token = random_bytes(64);
+    $token = base64_encode($token);
     $token = strtoupper($token);
 
     // CREATION D'UNE ID UNIQUE EN FONCTION DE L'HORODATAGE
@@ -35,10 +70,22 @@ function generateToken() {
 
     // Création d'une id privée
     $private_id = random_bytes(15);
-    $private_id = bin2hex($private_id); // Convertir les bytes en une chaîne hexadécimale    
+    $private_id = base64_encode($private_id); // Convertir les bytes en une chaîne hexadécimale    
     $private_id = strtoupper($private_id);
 
     return [$token, $user_id, $private_id];
+}
+
+function verify_password_validity($password) {
+    if(strlen($password) < 6 || strlen($password) > 32) {
+        die('Le mot de passe doit contenir entre 6 et 32 charactères.');
+    }
+}
+
+function verify_username_validity($username) {
+    if(strlen($username) < 6 || strlen($username) > 32) {
+        die("Le nom d'utilisateur doit contenir entre 6 et 32 charactères.");
+    }
 }
 
 function getUser($username, $json_file = '../../data/users.json') {
@@ -88,6 +135,10 @@ function addUser($username, $password, $remember) {
     if ($remember == "1") {
         setcookie("username", $username, time()+60*60*24*30, '/'); // On crée un cookie qui contient l'username unique de l'utilisateur pour le garder authentifier
         setcookie("token", $user_ids[0], time()+60*60*24*30, '/');
+    } else {
+        // On supprime les cookies
+        setcookie("username", '', time()-3600, '/');
+        setcookie("token", '', time()-3600, '/');
     }
 }
 
@@ -98,45 +149,45 @@ function addUser($username, $password, $remember) {
  */
 
 function register($username, $password, $remember) {
+    
+    verify_username_validity($username);
+    verify_password_validity($password);
+
     // Récupération de l'utilisateur demandé
     $user = getUser($username);
     // Si l'utilisateur existe déjà, on arrête tout
     if($user) {
         die( "L'utilisateur {$username} est déjà enregistré." );
     }
-
-    // Si le pseudo de l'utilisateur fais moins de 32 charactères
-    if(strlen($username) <= 32 and strlen($password) <= 32) {
-        // Enregistrement du nouvel utilisateur
-        addUser($username, $password, $remember);
-    } else {
-        die("Le pseudo et le mot de passe ne peuvent pas dépasser 32 charactères.");
-    }
+    
+    // Si les deux fonctions sont validées :
+    addUser($username, $password, $remember);
 }
 
 /**
  * Tente de connecter un utilisateur. Affecte les sessions.
- * @param string $username Adresse e-mail de l'utilisateur
+ * @param string $username Nom d'utilisateur de l'utilisateur
  * @param string $password Mot de passe non hashé
  */
 function login($username, $password, $remember) {
+
+    if (checkBruteForce($username)) {
+        die("Tentatives de connexion bloquées. Réessayez plus tard.");
+    }
+
+    verify_username_validity($username); // Entre 6 et 32 charactères
+    verify_password_validity($password); // Entre 6 et 32 charactères
+    
     // Récupération de l'utilisateur
     $json = getAllUsers();
 
-    if(isset($_COOKIE['private_key'])){
-        setcookie("private_key", "null", time() - 3600, '/'); // On supprime les cookies
-        setcookie("token", "null", time() - 3600, '/');
-      } else {
-        // Faites quelque chose si le cookie n'est pas défini
-      }
-
     // Si l'utilisateur n'a pas pu être récupéré.
-    if( ! array_key_exists($username, $json) ) {
+    if(!array_key_exists($username, $json) ) {
         die( "L'utilisateur {$username} n'est pas enregistré." );
     }
 
     if (!password_verify($password, $json[$username]['password'])) {
-        die( "L'utilisateur {$username} n'est pas enregistré." );
+        die( "Mot de passe incorrect" );
     }
 
     // Génération d'un nouveau token de sécurité.
@@ -151,8 +202,14 @@ function login($username, $password, $remember) {
     $_SESSION['token'] = $token;
 
     if ($remember == "1") {
-        setcookie("username", $username, time()+60*60*24*30, '/'); // On crée un cookie qui contient l'username unique de l'utilisateur pour le garder authentifier
-        setcookie("token", $token, time()+60*60*24*30, '/');
+        setcookie("username", $username, time()+60*60*24*30, '/', '', true, true); // Le dernier argument true active le marquage Secure et HttpOnly.
+        setcookie("token", $token, time()+60*60*24*30, '/', '', true, true);
+    } else {
+        // On supprime les cookies
+        setcookie("username", '', time()-3600, '/');
+        setcookie("token", '', time()-3600, '/');
     }
+
+    session_regenerate_id(true);
 }
 ?>

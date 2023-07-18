@@ -1,40 +1,32 @@
----- 16 Juillet 2023 ----
-     --- V0.6 ---
-  -- Display Update --
+---- 18 Juillet 2023 ----
+     --- V0.6.1 ---
+  -- Security Patch --
 
 Ajouts :
-    Tchat :
-        - Ajout de la possibilité de sauter des lignes dans son message.
-        - Préparation d'un futur support des images dans les tchats
-
-    Gestion des évenements/erreurs :
-        - Une flèche vers le haut s'affiche lorsqu'un message est en cours d'envoi.
-        - Un point d'exclamation apparaît dès qu'un message n'a pas été envoyé.
-        - Un voyant en haut à droite s'affiche dès que l'utilisateur est hors ligne ou qu'une
-          erreur survient sur le serveur. (un voyant différent pour les deux)
-        - Affichage d'un message d'erreur lorsqu'un tchat n'arrive pas à être ouvert.
-        - Affichage d'un message lorsqu'un tchat n'est pas ouvert.
-        - Désormais le champs d'écriture de demande d'ami clignote en rouge en cas d'erreur 
-          (avec un message) et en vert si la demande à été faite avec succès !
+    - Système de protection contre les tentatives de connexion par force brute
+        ↳ Au bout de 5 tentatives en 15 minutes, vous devrez attendre.
+    - Ajout de nouvelles règles pour traiter les demandes de création de compte/connexion,
+        ↳ Nom d'utilisateur :
+                - Entre 6 et 32 charactères.
+                - Ne doit pas déjà exister. (pour la création d'un compte)
+        ↳ Mot de passe :
+                - Entre 6 et 32 charactères.
+                - Doit être correct (pour la connexion à un compte existant).
 
 
 Modifications :
-    Sécurité : 
-        - SHA-1 étant obsolète, utilisation de BCrypt pour crypter les mots de passe et tokens
-        - Les tokens sont désormais cryptés dans la base de données.
-        - Il est désormais impossible de créer un compte avec plus de 32 charactère dans le mot de passe.
+    Sécurité :
+        - Ajout d'un marquage Secure pour que les cookies soit transmis uniquement via
+          une connexion HTTPS sécurisée et d'un marquage HttpOnly pour empecher
+          l'accès aux cookies via JavaScript et réduire le risque d'attaques de 
+          type cross-site scripting (XSS)
+        - A chaque changement de page, l'ID de SESSION sera modifié.
+        - Les tokens ferons désormais 512 bits et non 256 bits (augmentant
+          la sécurité contre les attaques par "devinettes" ou "force brutes")
 
-    Stockage :
-        - Lors de la création du fichier contenant une nouvelle discussion, le json sera au format 
-        JSON_PRETTY_PRINT.
 
-    Message :
-        - En cas d'erreur d'envoi de message, le champs d'écriture ne reprendra pas comme valeur 
-        l'ancien message.
-        - Il est désormais impossible d'envoyer des messages vides (à base de sauts de ligne
-          et d'espace)
-
-    Esthétique : 
-        - Changement de la couleur et ajout d'une bordure pour les éléments suivant :
-            - Champs d'écriture de messages et de demandes d'amis,
-            - Boutons pour supprimer des messages.
+Suppression :  
+    Sécurité :
+        - Suppression definitive de l'ancien système de token qui aurait pu être
+          conservés chez certaines personnes.
+          ("private_key" => "token")
