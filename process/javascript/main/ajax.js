@@ -20,6 +20,7 @@ function SendMessage() {
     });
     scrollToBottom();
     input.value = "";
+    $(".message_form_container").height(input.scrollHeight);
 
     // Effectuez la requête Ajax
     $.ajax({

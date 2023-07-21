@@ -85,6 +85,7 @@ window.addEventListener('DOMContentLoaded', function() {
     // Remettre le curseur à sa position d'origine
     input.selectionStart = startPos + 1;
     input.selectionEnd = startPos + 1;
+    $(".message_form_container").height(input.scrollHeight + 30);
   }
 });
 

@@ -19,7 +19,7 @@ include "./authentification_process.php"; // On inclut le fichier authentificati
 	} else { // Si la requête viens de register.php et non de login.php
 			
 		register($username,$password, $_POST['remember']); // Fonction permettant d'écrire l'ulisateur dans la base de donnée
-		header('Location: ../../user/main.php'); // Redirection vers les tchats
+		header('Location: ../../help/start.php'); // Redirection vers les tchats
     	exit;
 	}
 ?>

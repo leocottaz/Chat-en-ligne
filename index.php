@@ -9,35 +9,43 @@
   <title>Shadwow's Chat</title>
   <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="/style/index.css">
-  <link rel="stylesheet" media="(max-width: 767px)" href="/style/phone/index.css">
+  <link rel="stylesheet" media="(max-width: 775px)" href="/style/phone/index.css">
 </head>
 
 <body>
-  <nav>
-<?php 
-include "./process/auth/verification.php";
 
-$connected = connected("./data/users.json");
+<h1 class="title">Shadwow Chat</h1>
+<p><span class="bigger">La communication..</span><br>
+...est essentielle dans le monde d'aujourd'hui.<br>
+ ...rapproche les gens, facilite les relations personnelles et professionnelles,<br>
+  ...permet de partager des idées importantes à l'échelle mondiale.<br>
+   Sans communication efficace, il serait difficile de construire un avenir meilleur...<br>
+   <span class="bigger">..ensemble.</span><br>
+</p>
 
-if ($connected[0] == False) {
-  echo "
-  <a href=\"login.php\">
-      Se connecter
-  </a>
-  ";
-} else {
-  echo "
-  <a href=\"./user/main.php\">
-      Accéder à mon espace
-  </a>
-  ";
-}
-?>  
-</nav>
+<div class='button_div'>
+  <?php
+  include "./process/auth/verification.php";
 
-<div class="title">
-<p>Refaisons la communication.. Ensemble...</p>
-<p>Nom</p>
+  $connected = connected("./data/users.json");
+
+  if ($connected[0] == False) {
+    echo "
+    <a class='button register' href=\"register.php\">
+        S'inscrire
+    </a>
+    <a class='button login' href=\"login.php\">
+        Se connecter
+    </a>
+    ";
+  } else {
+    echo "
+    <a class='button login' href=\"./user/main.php\">
+        Ouvrir Shadwow Chat
+    </a>
+    ";
+  }
+  ?>
 </div>
 
 </body>

@@ -1,0 +1,86 @@
+:root {
+    --background-body: #141414;
+    --background-div: #151515;
+    --color-border: #bb9457;
+    --color-text: #bb9457;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-body);
+    color: var(--color-text);
+    text-align: center;
+    display: flex;
+    align-items: center; /* Centre verticalement les éléments dans le conteneur */
+    justify-content: center; /* Centre horizontalement les éléments dans le conteneur (si nécessaire) */
+}
+
+#login, #register {
+    position: relative;
+    width: 95%;
+    height: 80%;
+    background-color: var(--background-div);
+    border: 2px solid var(--color-border);
+    border-radius: 40px;
+}
+
+.title {
+    margin-top: 50px;
+    height: 27px;
+}
+
+input {
+    width: 80%;
+    height: 40px;
+    font-size: 25px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: transparent;
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    outline: none;
+}
+
+.username, .password {
+    color: var(--color-text);
+    margin-top: 30px;
+}
+
+.checkbox-container {
+    margin-top: 50px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.remember-text {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+.remember-text p {
+    margin: 0;
+    margin-left: 15px;
+    font-size: 20px;
+}
+
+.checkbox {
+    margin-right: 5px;
+    width: 30px;
+    height: 30px;
+}
+
+.submit {
+    color: var(--color-text);
+    margin-top: 60px;
+    height: unset;
+}
+
+.switch_method {
+    margin: 0 auto;
+    margin-top: 20px;
+}

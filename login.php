@@ -8,36 +8,33 @@
     <title>Shadwow Chat - Rebonjour</title>
     <link rel="shortcut icon" href="">
     <link rel="stylesheet" href="/style/login.css">
-    <link rel="stylesheet" media="(max-width: 767px)" href="/style/phone/login.css">
+    <link rel="stylesheet" media="(max-width: 1180px)" href="/style/phone/login.css">
 </head>
 
 <body>
     <!-- Div contenant le formulaire de connexion -->
     <div id="login">
-        <?php 
-        // Vérification de la présence d'une erreur dans le lien (retournée par redirect.php en cas de mauvais identifiant ou mot de passe)
-        if (isset($_GET['error'])) {
-            // Affichage du message d'erreur si le mot de passe ou l'identifiant sont incorrects
-            echo "<h2 class=\"error\">Mauvais mot de passe ou identifiant inconnu !</h2>";
-        }
-        ?>
         <!-- Formulaire de connexion qui envoie les données au script de redirection (redirect.php) -->
         <form action="/process/auth/redirect.php?a=login" method="POST">
+            <h2 class="title">Connectez vous à votre compte</h2>
             <!-- Champ pour le nom d'utilisateur -->
-            <input maxlength="32" type="text" id="ident" name="username" placeholder="Nom d'utilisateur"><br>
+            <input maxlength="32" type="text" class="username" name="username" placeholder="Nom d'utilisateur"><br>
             <!-- Champ pour le mot de passe -->
-            <input maxlength="32" type="password" id="motpasse" name="password" placeholder="Mot de passe"><br><br>
-            <label>
-                <input type="hidden" name="remember" value="0" />
-                <input type="checkbox" name="remember" value="1" />
-                    Se souvenir de moi
-            </label>
+            <input maxlength="32" type="password" class="password" name="password" placeholder="Mot de passe"><br><br>
+            <div class="checkbox-container">
+                <label class="remember-text">
+                    <input type="hidden" name="remember" value="0" />
+                    <input class="checkbox" type="checkbox" name="remember" value="1" />
+                    <span class="checkmark"></span>
+                        <p>Retenir cet appareil pendant 30 jours.</p>
+                </label>
+            </div>
             
             <!-- Bouton pour soumettre le formulaire -->
-            <input type="submit" id="submit" value="Se connecter">
+            <input type="submit" class="submit" value="Se connecter">
         </form>
         <!-- Lien pour créer un compte utilisateur -->
-        <p class="switch_method">Vous n'avez pas de compte ? <a href="./register.php">Créer en un !</a></p>
+        <p class="switch_method">Vous n'avez pas de compte ? <a href="./register.php">Créez en un !</a></p>
     </div>
 </body>
 </html>

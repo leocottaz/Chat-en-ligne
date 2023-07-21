@@ -1,32 +1,27 @@
----- 18 Juillet 2023 ----
-     --- V0.6.1 ---
-  -- Security Patch --
+    ---- 21 Juillet 2023 ----
+          --- V0.7 ---
+ -- Design and Welcome Update --
 
-Ajouts :
-    - Système de protection contre les tentatives de connexion par force brute
-        ↳ Au bout de 5 tentatives en 15 minutes, vous devrez attendre.
-    - Ajout de nouvelles règles pour traiter les demandes de création de compte/connexion,
-        ↳ Nom d'utilisateur :
-                - Entre 6 et 32 charactères.
-                - Ne doit pas déjà exister. (pour la création d'un compte)
-        ↳ Mot de passe :
-                - Entre 6 et 32 charactères.
-                - Doit être correct (pour la connexion à un compte existant).
+Nouveautés :
+    Esthétique :
+    - Nouveau style de la page d'accueil.
+    - Les pages de création/connexion de compte sont désormais stylisées
+    - Le style de la barre d'écriture de message à été refaite.
+
+    Bienvenue :
+    - Nouvelle page de bienvenue pour les comptes nouvellement créés avec un tuto sur comment
+      utiliser le tchat.
+
+    Version téléphone :
+    - Début de la compatibilité de la page "Amis".
 
 
 Modifications :
-    Sécurité :
-        - Ajout d'un marquage Secure pour que les cookies soit transmis uniquement via
-          une connexion HTTPS sécurisée et d'un marquage HttpOnly pour empecher
-          l'accès aux cookies via JavaScript et réduire le risque d'attaques de 
-          type cross-site scripting (XSS)
-        - A chaque changement de page, l'ID de SESSION sera modifié.
-        - Les tokens ferons désormais 512 bits et non 256 bits (augmentant
-          la sécurité contre les attaques par "devinettes" ou "force brutes")
+    Gestions des erreurs :
+    - Désormais les erreurs des pages de login/register s'afficheront directement dessus.
 
 
-Suppression :  
-    Sécurité :
-        - Suppression definitive de l'ancien système de token qui aurait pu être
-          conservés chez certaines personnes.
-          ("private_key" => "token")
+Problèmes résolus :
+    Résolutions de problèmes mineurs :
+    - La barre d'écriture de message ne se redimensionnais pas lorsque l'on sautais de ligne.
+    - Fautes d'orthographe dans la page "Amis".

@@ -1,0 +1,232 @@
+:root {
+  --color-body: #141414;
+  --color-nav: #1B3334;
+  --color-text: white;
+}
+
+html,
+body {
+  min-height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-body);
+  text-align: center;
+  overflow-y: hidden;
+  overflow-X: hidden;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.friend_form_container {
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+}
+
+.friend_await_response_div {
+  overflow-y: auto;
+  align-items: center;
+  width: 40%;
+}
+
+.friend_await_response span {
+  order: 1;
+}
+
+.button {
+  user-select: none;
+  border: none; /* Ajout de cette ligne pour supprimer la bordure par défaut */
+  box-shadow: none; /* Ajout de cette ligne pour supprimer l'effet de relief */
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.cancel_request {
+  background-color: rgba(177, 57, 57, 0.5);
+  background-image: url("../image/icon/cancel.svg");
+  order: 3;
+}
+
+.accept_request {
+  background-color: rgba(57, 177, 65, 0.5);
+  background-image: url("../image/icon/check.svg");
+  order: 2;
+}
+
+.friend_await_response {
+  font-size: 1.5vw;
+  max-width: 100%;
+  user-select: none;
+  border-radius: 10px 10px 10px 10px;
+  background-color: rgba(77, 77, 77, 0.5);
+  padding: 5px;
+  padding-inline: 10px;
+  align-items: center;
+  height: 50px;
+  margin: 10px;
+  margin-inline: 5px;
+  color: white;
+  justify-content: space-between;
+}
+
+.buttons {
+  flex-shrink: 0;
+  max-height: 30px;
+  margin-top: auto;
+  margin-bottom: auto;
+  order: 2;
+}
+
+.friend_form {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.friend_center_div {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+}
+
+.friend_await_response {
+  display: flex;
+  flex: 1;
+}
+
+.title {
+  user-select: none;
+  color: white;
+}
+
+.vertical_separator {
+  height: 100%;
+  width: 2px;
+  background-color: rgb(33, 33, 33);
+}
+
+.horizontal_separator {
+  margin: 0 auto;
+  margin-bottom: 30px;
+  height: 3px;
+  width: 80%;
+  background-color: rgb(33, 33, 33);
+}
+
+.friend_request {
+  flex: 2;
+}
+
+.friend_search_input {
+  caret-color: #C3C3C3;
+  color: white;
+  background-color: transparent;
+  border: 1px solid #9b9b9b;
+  width: 80%;
+  padding: 10px;
+  margin: 10px;
+  margin-left: 20px;
+  border-radius: 10px;
+  transition: 0.1s ease all;
+}
+
+.friend_search_input:focus {
+  outline: none; /* Supprimer la bordure de focus */
+}
+
+.submit {
+  color: white;
+  background-color: transparent;
+  border: 1px solid #9b9b9b;
+  padding: 10px;
+  margin: 10px;
+  margin-left: 5px;
+  border-radius: 10px;
+}
+
+.div_friend_list {
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 20vw;
+  padding-inline: 10px;
+  height: 100vh;
+  background-color: #292929;
+}
+
+.friend_list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.friend_a {
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  text-decoration: none;
+  padding: 10px;
+  display: block;
+  text-decoration: none;
+  color: white;
+  background-color: rgba(41, 41, 41, 0.5);
+  transition: all 0.35s ease;
+}
+
+.friend_a:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+  color: black;
+}
+
+.friend span {
+  font-size: 12px;
+  color: #999;
+}
+
+.go_main_button {
+  background-image: url('../image/icon/message.svg');
+  background-size: 40%;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  padding-inline: 30px;
+  margin: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.display-warn {
+  text-align: left;
+  height: 40px;
+  width: 100%;
+}
+
+.error-text {
+  margin-top: 0;
+  margin-left: 20px;
+  color: #dc3545;
+}
+
+.shake-animation {
+  animation: shake 0.3s;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-2px); }
+  40% { transform: translateX(2px); }
+  60% { transform: translateX(-2px); }
+  80% { transform: translateX(2px); }
+  100% { transform: translateX(0); }
+}

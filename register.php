@@ -8,37 +8,31 @@
     <title>Shadwow Chat - Bienvenue</title>
     <link rel="shortcut icon" href="">
     <link rel="stylesheet" href="/style/login.css">
-    <link rel="stylesheet" media="(max-width: 767px)" href="/style/phone/login.css">
+    <link rel="stylesheet" media="(max-width: 1180px)" href="/style/phone/login.css">
 </head>
 
 <body>
 <div id="register">
-        <form action="/process/auth/redirect.php?a=register" method="POST">
-        <?php 
-            /* Vérification de si la variable de requête GET 'error' est définie et a une valeur "known" ou "invalid".
-            Si elle a la valeur "known", cela signifie qu'un utilisateur avec le même nom existe déjà et un message d'erreur est affiché. 
-            Si elle a la valeur "invalid", cela signifie qu'un nom d'utilisateur ou un mot de passe contient des caractères invalides et un autre message d'erreur est affiché. */
-        if (isset($_GET['error'])) {
-            if ($_GET['error'] === "known") {
-                echo "<h2 class=\"error\">Utilisateur déjà enregistré.</h2>";
-            }
-            if ($_GET['error'] === "invalid") {
-                echo "<h2 class=\"error\">Caractère invalide : \" ' `</h2>";
-            }
-        }
-        ?>
-            <!-- Les éléments de formulaire suivants sont définis pour saisir le nom d'utilisateur, le mot de passe et pour soumettre le formulaire -->
-            <input maxlength="32" type="text" id="ident" name="username" placeholder="Nom d'utilisateur"><br>
-            <input maxlength="32" type="password" id="motpasse" name="password" placeholder="Mot de passe"><br><br>
-            <label>
-                <input type="hidden" name="remember" value="0"/>
-                <input type="checkbox" name="remember" value="1"/>
-                    Se souvenir de moi
-            </label>
-            <input type="submit" id="submit" value="Creer un compte">
+<form action="/process/auth/redirect.php?a=register" method="POST">
+            <h2 class="title">Créez vous un compte</h2>
+            <!-- Champ pour le nom d'utilisateur -->
+            <input maxlength="32" type="text" class="username" name="username" placeholder="Nom d'utilisateur"><br>
+            <!-- Champ pour le mot de passe -->
+            <input maxlength="32" type="password" class="password" name="password" placeholder="Mot de passe"><br><br>
+            <div class="checkbox-container">
+                <label class="remember-text">
+                    <input type="hidden" name="remember" value="0" />
+                    <input class="checkbox" type="checkbox" name="remember" value="1" />
+                    <span class="checkmark"></span>
+                        <p>Retenir cet appareil pendant 30 jours.</p>
+                </label>
+            </div>
+            
+            <!-- Bouton pour soumettre le formulaire -->
+            <input type="submit" class="submit" value="Créer le compte">
         </form>
         <!-- Un lien est ajouté pour se connecter si l'utilisateur a déjà un compte -->
-        <p class="switch_method">Vous avez déjà un compte ? <a href="./login.php">Connecter vous !</a></p>
+        <p class="switch_method">Vous avez déjà un compte ? <a href="./login.php">Connectez vous !</a></p>
     </div>
 </body>
 </html>

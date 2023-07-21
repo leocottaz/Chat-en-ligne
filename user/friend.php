@@ -20,7 +20,7 @@ if (!$connected[0]) {
   <title>Shadwow's Chat - Amis</title>
   <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="../style/friend.css">
-  <link rel="stylesheet" media="(max-width: 767px)" href="../style/phone/friend.css">
+  <link rel="stylesheet" media="(max-width: 890px)" href="../style/phone/friend.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="../process/javascript/friend/ajax.js"></script>
   <script src="../process/javascript/friend/initialisation_friend.js"></script>
@@ -64,7 +64,7 @@ if (!$connected[0]) {
       </div>
       <div class="vertical_separator"></div>
       <div class="friend_request">
-        <p class="title"> Vos demandes reçus </p>
+        <p class="title"> Vos demandes reçues </p>
         <div class="horizontal_separator"></div>
         <?php
           friend_request("../data/users.json");
