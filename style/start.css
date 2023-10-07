@@ -17,7 +17,7 @@ body {
 }
 
 body {
-    overflow-y: scroll;
+    overflow-y: none;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -285,7 +285,6 @@ body {
     margin-inline: 20px;
     padding: 10px;
     padding-inline: 10%;
-    background-color: white;
     text-decoration: none;
     border-radius: 15px;
     font-size: 35px;
@@ -303,5 +302,25 @@ body {
     box-shadow: 0 0 30px 5px rgba(0, 0, 0, 0.815);
     background-color: var(--background-login-button);
     border: 2px solid var(--color-text);
+    color: var(--color-login-button);
+}
+
+.pass {
+    opacity: 0;
+    font-weight: bold;
+    padding: 20px;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    font-size: 25px;
+    color: var(--color-text);
+    background-color: transparent;
+    border-radius: 5px;
+    border: 2px solid var(--color-text);
+    transition: all 0.3s ease-in-out;
+}
+
+.pass:hover {
+    background-color: var(--background-login-button);
     color: var(--color-login-button);
 }

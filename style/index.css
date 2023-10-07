@@ -85,10 +85,8 @@ p {
 }
 
 .login:hover {
-    padding: 15px;
-    padding-inline: 10%;
+    padding: 20px;
+    padding-inline: 9%;
+    font-size: 40px;
     box-shadow: 0 0 30px 5px rgba(0, 0, 0, 0.815);
-    background-color: transparent;
-    border: 2px solid var(--color-text);
-    color: var(--color-text);
 }

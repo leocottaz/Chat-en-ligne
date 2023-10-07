@@ -124,7 +124,6 @@ h3 {
 }
 
 .search_friend_button {
-  background-image: url('./image/icon/friend_search.svg');
   background-size: 40%;
   border: none;
   outline: none;

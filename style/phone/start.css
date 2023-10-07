@@ -305,3 +305,8 @@ body {
     border: 2px solid var(--color-text);
     color: var(--color-login-button);
 }
+
+.pass {
+    padding: 4px;
+    top: 35px;
+}

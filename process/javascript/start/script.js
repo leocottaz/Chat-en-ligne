@@ -5,6 +5,27 @@ function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+async function pass() {
+    $('.container').removeClass('show');
+    $('.pass').css('opacity', '0');
+
+    await sleep(500);
+
+    $('.container').remove()
+
+    $('body').css("background-color", '#141414');
+
+    await sleep(500);
+
+    $('.button').css('display', 'block');
+    $('.title-container').css('display', 'block');
+
+    await sleep(500);
+    
+    $('.button').css("opacity", 1);
+    $('.title').addClass('show');
+}
+
 function scrollToBottom() {
     document.querySelector('.tchat').scrollTo({
         top: document.querySelector('.tchat').scrollHeight,
@@ -43,6 +64,8 @@ async function start() {
     await sleep(500);
     $('.container').addClass('display-flex');
     $('.container').addClass('show');
+    $('.pass').css('opacity', '1');
+
 
     await sleep(1200);
 

@@ -1,27 +1,30 @@
-    ---- 21 Juillet 2023 ----
-          --- V0.7 ---
- -- Design and Welcome Update --
+---- 7 Octobre 2023 ----
+     --- V0.7.1 ---
+      -- Patch --
 
 Nouveautés :
-    Esthétique :
-    - Nouveau style de la page d'accueil.
-    - Les pages de création/connexion de compte sont désormais stylisées
-    - Le style de la barre d'écriture de message à été refaite.
-
-    Bienvenue :
-    - Nouvelle page de bienvenue pour les comptes nouvellement créés avec un tuto sur comment
-      utiliser le tchat.
-
-    Version téléphone :
-    - Début de la compatibilité de la page "Amis".
+    - Il est désormais possible de passer le tutoriel lors de la création du compte.
 
 
 Modifications :
-    Gestions des erreurs :
-    - Désormais les erreurs des pages de login/register s'afficheront directement dessus.
+    Affichage :
+        - Pour améliorer la visibilité, dans la page d'accueil, lorsque l'on survole le 
+        bouton "Se Connecter", il ne devient plus transparent avec un bord doré mais 
+        grossit simplement.
+        - Correction du nom de l'onglet dans la page d'accueil.
 
 
-Problèmes résolus :
-    Résolutions de problèmes mineurs :
-    - La barre d'écriture de message ne se redimensionnais pas lorsque l'on sautais de ligne.
-    - Fautes d'orthographe dans la page "Amis".
+Suppression :
+    /////////////////////
+
+
+Problèmes résolus :                   [] = comment reproduire le problème
+    Affichage :
+        - Sur les petits écrans, le bouton 'recherche d'amis' n'apparaît pas comme prévu.
+        - Les erreurs d'inscription/connexion ne s'affichent pas comme prévu sur
+        la page directement.
+            ↳ Certaines fonctions ont été corrigées au passage.
+
+
+Problèmes connus :
+    /////////////////////

@@ -26,6 +26,7 @@ if (!$connected[0]) {
  </head>
 
  <body>
+ <a class="pass" onclick='pass()'>Passer</a>
   <div class="title-container">
   <h1 class="title">Bienvenue</h1>
   <p class="subtitle">Votre compte à été créé avec succès</p>
@@ -33,7 +34,6 @@ if (!$connected[0]) {
 </div>
 <br>
   <div class="container">
-
     <div class="top_bar" style="background-color: rgb(10, 10, 10);">
       <h3>Assistant</h3><div style="background-color: red;" class="connexion_badge"></div>      <img class="connexion_error_pic" src="http://localhost:3000/style/image/icon/connexion-error.svg" title="Vous n'êtes plus connecté à internet" style="display: none;">
     </div>
