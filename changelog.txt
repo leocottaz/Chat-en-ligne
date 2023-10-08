@@ -1,17 +1,13 @@
----- 7 Octobre 2023 ----
-     --- V0.7.1 ---
+---- 8 Octobre 2023 ----
+     --- V0.7.2 ---
       -- Patch --
 
 Nouveautés :
-    - Il est désormais possible de passer le tutoriel lors de la création du compte.
+    /////////////////////
 
 
 Modifications :
-    Affichage :
-        - Pour améliorer la visibilité, dans la page d'accueil, lorsque l'on survole le 
-        bouton "Se Connecter", il ne devient plus transparent avec un bord doré mais 
-        grossit simplement.
-        - Correction du nom de l'onglet dans la page d'accueil.
+    /////////////////////
 
 
 Suppression :
@@ -19,11 +15,7 @@ Suppression :
 
 
 Problèmes résolus :                   [] = comment reproduire le problème
-    Affichage :
-        - Sur les petits écrans, le bouton 'recherche d'amis' n'apparaît pas comme prévu.
-        - Les erreurs d'inscription/connexion ne s'affichent pas comme prévu sur
-        la page directement.
-            ↳ Certaines fonctions ont été corrigées au passage.
+    - Correction de problèmes importants dans le code source du site (empêchant son fonctionnement)
 
 
 Problèmes connus :

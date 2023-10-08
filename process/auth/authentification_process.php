@@ -1,14 +1,15 @@
 <?php 
 
 function error($input, $error, $username, $password) {
-    $_SESSION['error'] = $error;
-    $_SESSION['input'] = $input;
-    $_SESSION['username'] = $username;
-    $_SESSION['password'] = $password;
-    $page = $_GET["a"];
-
-    header("Location: ../../$page.php");
-    exit;
+    if (isset($_GET['a'])) {
+        $page = $_GET["a"];
+        $_SESSION['error'] = $error;
+        $_SESSION['input'] = $input;
+        $_SESSION['username'] = $username;
+        $_SESSION['password'] = $password;
+        header("Location: ../../$page.php");
+        exit;
+    }
 }
 
 function checkBruteForce($username) {
@@ -47,14 +48,14 @@ function checkBruteForce($username) {
 /**
  * Renvoie tous les utilisateurs enregistrés
  */
-function getAllUsers($username, $password, $json_file = '../../data/users.json') {
+function getAllUsers($json_file = '../../data/users.json') {
     try {
         $decode = file_get_contents($json_file);
         $json = json_decode($decode, true);
         return $json;
     }
     catch( Exception $e ) { // Gestion d'erreur lors de l'ouverture du json
-        error('all', "Une erreur est survenue.", $username, $password);
+        error('all', "Une erreur est survenue.", "", "");
     }
   }
 
@@ -97,17 +98,17 @@ function verify_username_validity($username, $password) {
     }
 }
 
-function getUser($username, $password, $json_file = '../../data/users.json') {
+function getUser($username, $json_file = '../../data/users.json') {
     try {
         // Récupération de la liste de tous les utilisateurs
-        $json = getAllUsers($username, $password, $json_file);
+        $json = getAllUsers($json_file);
 
         // Si l'adresse e-mail est une clé de la liste des utilisateurs ...
         return array_key_exists($username, $json)
             ? $json[$username] // alors: retourne la valeur qui correspond
             : False;           // sinon: retourne faux
     } catch( Exception $e ) { // Gestion d'erreur lors de l'ouverture du json
-        error('all', "Une erreur est survenue.", $username, $password);
+        error('all', "Une erreur est survenue.", "", "");
     }
 }
 
@@ -125,7 +126,7 @@ function updateJson($user_data, $username, $password, $json_file = '../../data/u
 
 function addUser($username, $password, $remember=0) {
     // Récupération de la liste de tous les utilisateurs
-    $json = getAllUsers($username, $password);
+    $json = getAllUsers();
     $user_ids = generateToken();
 
     // Ajout du nouvel utilisateur
@@ -167,7 +168,7 @@ function register($username, $password, $remember) {
     verify_password_validity($username, $password);
 
     // Récupération de l'utilisateur demandé
-    $user = getUser($username, $password);
+    $user = getUser($username);
     // Si l'utilisateur existe déjà, on arrête tout
     if($user) {
         error('username', "L'utilisateur '$username' existe déjà.", $username, $password);
@@ -189,15 +190,16 @@ function login($username, $password, $remember) {
     }
 
     verify_username_validity($username, $password); // Entre 6 et 32 charactères
-    verify_password_validity($username, $password); // Entre 6 et 32 charactères
-    
+
     // Récupération de l'utilisateur
-    $json = getAllUsers($username, $password);
+    $json = getAllUsers();
 
     // Si l'utilisateur n'a pas pu être récupéré.
     if(!array_key_exists($username, $json) ) {
         error('username', "L'utilisateur '$username' n'existe pas.", $username, $password);
     }
+    
+    verify_password_validity($username, $password); // Entre 6 et 32 charactères
 
     if (!password_verify($password, $json[$username]['password'])) {
         error('password', "Le mot de passe est incorrect.", $username, $password);

@@ -5,7 +5,7 @@ function connected($json_file = '../../data/users.json') {
     // On vérifie si l'utilisateur est connecté avec les variables de session :
     if (isset($_SESSION['username']) and isset($_SESSION['token'])) {
         $token = $_SESSION["token"];
-        $json = getAllUsers("","",$json_file);
+        $json = getAllUsers($json_file);
 
         // Si l'adresse e-mail est une clé de la liste des utilisateurs ...
         if (array_key_exists($_SESSION['username'], $json)) {
@@ -26,7 +26,7 @@ function connected($json_file = '../../data/users.json') {
 function connected_cookie($json_file) {
     if (isset($_COOKIE["username"]) and isset($_COOKIE["token"])) {
         $token = $_COOKIE["token"];
-        $json = getAllUsers("","",$json_file);
+        $json = getAllUsers($json_file);
 
         // Si l'adresse e-mail est une clé de la liste des utilisateurs ...
         if (array_key_exists($_COOKIE['username'], $json)) {
