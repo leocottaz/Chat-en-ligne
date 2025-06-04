@@ -1,12 +1,27 @@
-[MonChat](https://github.com/leocottaz/Chat-en-ligne) – Est un chat en ligne, qui permet à plusieurs utilisateurs de discuter en temps réel de façon privée via une interface web.
+# MyChat
 
+MyChat un chat en ligne, qui permet à plusieurs utilisateurs de discuter en temps réel de façon privée via une interface web.
+
+---
 ## 📖 Sommaire
 
+- [🖼️ Galerie photo](#️-galerie-photo)
 - [❓ Pourquoi ?](#-pourquoi-)
 - [✨ Fonctionnalités](#-fonctionnalités)
-- [🔧 Les technologies utilisées](#-les-technologies-utilisées)
+- [🔧 Les technologies utilisés](#-les-technologies-utilisés)
 - [🔜 Une suite ?](#-une-suite-)
-- [🖼️ Galerie photo](#️-galerie-photo)
+
+## 🖼️ Galerie photo
+
+Page de chat :
+![chat_page](https://i.imgur.com/XsMECkD.png)
+
+Page des demandes d'amis :
+![friend_page](https://i.imgur.com/uuDaM54.png)
+
+Commande /color utilisée :
+![color_command](https://i.imgur.com/34adxH0.png)
+
 ## ❓ Pourquoi ?
 
 J’ai créé ce projet de chat en ligne en PHP dans le but principal d’apprendre en **autodidacte** le développement web côté serveur. Ce projet m’a permis de mettre en pratique les bases du langage PHP, de mieux comprendre la *gestion des sessions, les formulaires, l’enregistrement des données, ainsi que l’interaction entre le front-end et le back-end*.
@@ -23,7 +38,7 @@ En résumé, ce projet a été pour moi une excellente occasion d’apprendre co
 - Indication de la présence de l’ami dans la conversation,
 - Possibilité d’utiliser des commandes dans le chat.
 
-## 🔧 Les technologies utilisées
+## 🔧 Les technologies utilisés
 
 - Backend :
   - PHP
@@ -49,17 +64,6 @@ En résumé, ce projet a été pour moi une excellente occasion d’apprendre co
 - Front-end :
   - Refonte complète de l’interface graphique
   - Passage de HTML/CSS/JS « brut » à des technologies modernes comme React pour le front-end et Tailwind CSS pour le design
-
-## 🖼️ Galerie photo
-
-Page de chat :
-![chat_page](https://i.imgur.com/XsMECkD.png)
-
-Page des demandes d'amis :
-![friend_page](https://i.imgur.com/uuDaM54.png)
-
-Commande /color utilisée :
-![color_command](https://i.imgur.com/34adxH0.png)
 
 *S'il vous plaît, ajoutez moi une étoile ! ⭐️*
 # [🔝](#-sommaire)
